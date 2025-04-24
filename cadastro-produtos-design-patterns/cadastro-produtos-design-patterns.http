@@ -1,0 +1,6 @@
+@cadastro_produtos_design_patterns_HostAddress = http://localhost:5163
+
+GET {{cadastro_produtos_design_patterns_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
