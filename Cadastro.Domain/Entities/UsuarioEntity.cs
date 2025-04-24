@@ -11,9 +11,9 @@ namespace Cadastro.Domain.Entities
     public class UsuarioEntity : BaseEntity
     {
         public  string DsNome { get; set; }
-        public int     NrIdade   { get; set; }
+        public int NrIdade   { get; set; }
         public List<PedidoEntity> PedidoEntity { get; set; }
-        public UsuarioEntity(int pkId, DateTime dhInclusao) : base(pkId, dhInclusao)
+        public UsuarioEntity() : base()
         {
         }
     }

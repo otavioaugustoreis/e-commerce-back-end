@@ -9,7 +9,7 @@ namespace Cadastro.Domain.Entities
 {
     public class PedidoItemEntity : BaseEntity
     {
-        public PedidoItemEntity(int pkId, DateTime dhInclusao) : base(pkId, dhInclusao)
+        public PedidoItemEntity()
         {
         }
         public  ProdutoEntity ProdutoEntity { get; set; }
@@ -17,5 +17,6 @@ namespace Cadastro.Domain.Entities
         public int FkPedido { get; set; }
         public int FkProduto { get; set; }
         public  int  NrQuantidade { get; set; }
+
     }
 }

@@ -17,7 +17,9 @@ namespace Cadastro.Domain.Entities
         public int FkPagamento { get; set; }
         public List<PedidoItemEntity> PedidoItemEntity { get; set; }
         public List<NotificacaoEntity> NotificacaoEntity { get; set; }
-        public PedidoEntity(int pkId, DateTime dhInclusao) : base(pkId, dhInclusao)
+
+        public double NrValor { get; set; }
+        public PedidoEntity() : base()
         {
         }
     }

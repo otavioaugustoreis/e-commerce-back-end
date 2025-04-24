@@ -12,10 +12,9 @@ namespace Cadastro.Domain.Entities
     {
         public  string  DsNome { get; set; }
         public int  Quantidade { get; set; }
+        public double NrValor { get; set; }
         public List<PedidoItemEntity> PedidoItemEntity { get; set; }
-        public ProdutoEntity(int pkId, DateTime dhInclusao) : base(pkId, dhInclusao)
-        {
 
-        }
+        public ProdutoEntity() { }
     }
 }

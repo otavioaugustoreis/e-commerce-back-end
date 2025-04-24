@@ -16,6 +16,8 @@ namespace Cadastro.Data.EntitiesConfiguration
             builder.ToTable("TB_NOTIFICACAO");
 
             builder.HasKey(p => p.PkId);
+            
+
 
             builder.HasOne(p => p.PedidoEntity)
                 .WithMany(p => p.NotificacaoEntity)

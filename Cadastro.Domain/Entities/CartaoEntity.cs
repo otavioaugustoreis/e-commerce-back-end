@@ -1,4 +1,5 @@
 ﻿using Cadastro.Domain.Entities.Pattern;
+using Cadastro.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Cadastro.Domain.Entities
     {
         public int NrCartao { get; set; }
 
-        public CartaoEntity(int pkId, DateTime dhInclusao) : base(pkId, dhInclusao)
+        public CartaoEntity() : base(TipoPagamento.CARTAO) 
         {
         }
     }

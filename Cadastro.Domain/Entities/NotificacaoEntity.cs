@@ -13,7 +13,7 @@ namespace Cadastro.Domain.Entities
         public  PedidoEntity  PedidoEntity { get; set; }
 
         public int FkPedido { get; set; }
-        public NotificacaoEntity(int pkId, DateTime dhInclusao) : base(pkId, dhInclusao)
+        public NotificacaoEntity() : base()
         {
         }
     }
