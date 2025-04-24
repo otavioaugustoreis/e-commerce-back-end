@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <Folder Include="Abstraction\" />
+    <Folder Include="Data\" />
+    <Folder Include="Fluent\" />
     <Folder Include="UnitOfWork\" />
     <Folder Include="Repositories\" />
   </ItemGroup>

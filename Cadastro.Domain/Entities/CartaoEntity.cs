@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace Cadastro.Domain.Entities
 {
-    public abstract class PagamentoEntity : BaseEntity
+    public class CartaoEntity : PagamentoEntity
     {
-        public  PedidoEntity FkPedido { get; set; }
-        public PagamentoEntity(int pkId, DateTime dhInclusao) : base(pkId, dhInclusao)
+        public int NrCartao { get; set; }
+
+        public CartaoEntity(int pkId, DateTime dhInclusao) : base(pkId, dhInclusao)
         {
         }
     }
