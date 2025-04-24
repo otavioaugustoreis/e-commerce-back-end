@@ -8,6 +8,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cadastro.Application", "Cadastro.Application\Cadastro.Application.csproj", "{1C4F509A-0D6E-4484-B6FF-DBD6524CB4EE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cadastro.Data", "Cadastro.Data\Cadastro.Data.csproj", "{0F547984-73BB-433F-A3C6-6BC5DA7844F3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{39F8F75C-B160-4B5C-8045-5BA701F211B9} = {39F8F75C-B160-4B5C-8045-5BA701F211B9}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cadastro.Domain", "Cadastro.Domain\Cadastro.Domain.csproj", "{39F8F75C-B160-4B5C-8045-5BA701F211B9}"
 EndProject

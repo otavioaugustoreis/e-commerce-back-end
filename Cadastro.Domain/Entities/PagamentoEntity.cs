@@ -9,7 +9,8 @@ namespace Cadastro.Domain.Entities
 {
     public abstract class PagamentoEntity : BaseEntity
     {
-        public  PedidoEntity FkPedido { get; set; }
+        public PedidoEntity PedidoEntity { get; set; }
+
         public PagamentoEntity(int pkId, DateTime dhInclusao) : base(pkId, dhInclusao)
         {
         }
