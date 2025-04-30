@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Cadastro.Data.Repositories.Pattern
 {
-    public interface IRepository<T> where T : BaseEntity
+    public interface IRepository<T> 
     {
         Task<IEnumerable<T>> GetAsync();
         Task<T> GetByIdAsync(int? id);

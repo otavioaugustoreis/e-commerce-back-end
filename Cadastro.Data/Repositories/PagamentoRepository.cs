@@ -21,7 +21,8 @@ namespace Cadastro.Data.Repositories
 
         public Task<PagamentoEntity> CreateAsync(PagamentoEntity entity)
         {
-            throw new NotImplementedException();
+            appDbContext.Add(entity);
+            return Task.FromResult(entity);
         }
 
         public Task<IEnumerable<PagamentoEntity>> GetAsync()

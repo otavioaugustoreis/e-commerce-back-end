@@ -16,6 +16,12 @@ namespace Cadastro.Data.EntitiesConfiguration
             builder.ToTable("TB_PAGAMENTO");
 
             builder.HasKey(p => p.PkId);
+
+            builder.Property(p => p.PagamentoStatus)
+                .HasConversion<string>();
+
+            builder.Property(p => p.TipoPagamento)
+                .HasConversion<string>();
         }
     }
 }

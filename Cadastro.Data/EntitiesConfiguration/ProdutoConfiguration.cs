@@ -16,6 +16,9 @@ namespace Cadastro.Data.EntitiesConfiguration
             builder.ToTable("TB_PRODUTO");
 
             builder.HasKey(p => p.PkId);
+
+            builder.Property(p => p.NrValor)
+                .HasColumnType("decimal(10,2)");
         }
     }
 }
