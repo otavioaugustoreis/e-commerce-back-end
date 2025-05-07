@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Cadastro.Application.Error;
+using Cadastro.Application.Services;
+using Cadastro.Domain.Entities;
+using Microsoft.AspNetCore.Mvc;
 
 namespace cadastro_produtos_design_patterns.Controllers
 {
@@ -8,6 +11,18 @@ namespace cadastro_produtos_design_patterns.Controllers
     public class UsuarioController : ControllerBase
     {
 
-      
+        private readonly IUsuarioService usuarioService;
+
+        public UsuarioController(IUsuarioService usuarioService)
+        {
+            this.usuarioService = usuarioService;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<UsuarioEntity>> CadastrarUsuario(UsuarioEntity usuarioEntity)
+        {
+            
+            return Ok();
+        }
     }
 }
