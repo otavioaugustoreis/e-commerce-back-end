@@ -1,4 +1,5 @@
 ﻿using Cadastro.Application.Services;
+using Cadastro.Application.Services.Abstractions;
 using Cadastro.Data.UnitOfWork;
 using Microsoft.AspNetCore.WebSockets;
 using System.Runtime.CompilerServices;

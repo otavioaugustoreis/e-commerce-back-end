@@ -1,5 +1,4 @@
 ﻿using Cadastro.Application.Error;
-using Cadastro.Application.Services.Strategy;
 using Cadastro.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -7,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cadastro.Application.Services
+namespace Cadastro.Application.Services.Strategy
 {
-    public class CartaoService : IPagamentoStrategy
+    public class CartaoStrategy : IPagamentoStrategy
     {
         public Result<PagamentoEntity> Pagar(PagamentoEntity pagamento)
         {

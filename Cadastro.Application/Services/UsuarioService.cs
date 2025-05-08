@@ -1,4 +1,5 @@
 ﻿using Cadastro.Application.Error;
+using Cadastro.Application.Services.Abstractions;
 using Cadastro.Data.Repositories;
 using Cadastro.Data.Repositories.Pattern;
 using Cadastro.Data.UnitOfWork;

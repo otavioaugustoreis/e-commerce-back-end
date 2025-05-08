@@ -14,7 +14,6 @@ namespace Cadastro.Data.Data
             : base(options)
         {
         }
-
         public DbSet<PagamentoEntity>? _Pagamento { get; set; }
         public DbSet<UsuarioEntity>? _Usuario { get; set; }
         public DbSet<PedidoItemEntity>? _PedidoItem { get; set; }

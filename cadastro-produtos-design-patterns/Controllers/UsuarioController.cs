@@ -1,5 +1,5 @@
 ﻿using Cadastro.Application.Error;
-using Cadastro.Application.Services;
+using Cadastro.Application.Services.Abstractions;
 using Cadastro.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 

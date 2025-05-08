@@ -17,8 +17,8 @@ namespace Cadastro.Application.Services.Factory
         {
             return tipoPagamento switch
             {
-                TipoPagamento.CARTAO => services.GetRequiredService<CartaoService>(),
-                TipoPagamento.PIX => services.GetRequiredService<PixService>(),
+                TipoPagamento.CARTAO => services.GetRequiredService<CartaoStrategy>(),
+                TipoPagamento.PIX => services.GetRequiredService<PixStrategy>(),
                 _ => throw new NotImplementedException("Tipo não implementado.")
 
             };
