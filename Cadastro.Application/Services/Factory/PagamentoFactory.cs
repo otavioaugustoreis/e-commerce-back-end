@@ -13,6 +13,12 @@ namespace Cadastro.Application.Services.Factory
     public class PagamentoFactory : IPagamentoFactory
     {
         private readonly IServiceProvider services;
+
+        public PagamentoFactory(IServiceProvider services)
+        {
+            this.services = services;
+        }
+
         public IPagamentoStrategy RetornarPagamento(TipoPagamento tipoPagamento)
         {
             return tipoPagamento switch

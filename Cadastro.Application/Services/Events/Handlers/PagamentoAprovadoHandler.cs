@@ -10,6 +10,8 @@ namespace Cadastro.Application.Services.Events.Handlers
 {
     public class PagamentoAprovadoHandler : INotificationHandler<PagamentoAprovadoEvent>
     {   
+
+
         public Task Handle(PagamentoAprovadoEvent notification, CancellationToken cancellationToken)
         {
             Console.WriteLine($"Pagamento aprovado! ID: {notification.PagamentoId}, Valor: R${notification.Valor}");

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cadastro.Application.Error
+namespace Cadastro.Application.Return 
 {
     public class Result<T>
     {
