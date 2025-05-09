@@ -8,7 +8,7 @@ namespace Cadastro.Application.Services.Strategy
 {
     public class SmsStrategy : ILocalMessageStrategy
     {
-        public void EnviarMenssagem(string mensagem)
+        public async Task EnviarMenssagem(string mensagem)
         {
             throw new NotImplementedException();
         }

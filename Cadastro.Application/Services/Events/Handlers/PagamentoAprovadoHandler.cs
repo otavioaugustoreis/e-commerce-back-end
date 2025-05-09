@@ -1,4 +1,6 @@
-﻿using Cadastro.Application.Services.Event;
+﻿using Cadastro.Application.Services.Abstractions;
+using Cadastro.Application.Services.Event;
+using Cadastro.Application.Services.Factory;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,14 +10,19 @@ using System.Threading.Tasks;
 
 namespace Cadastro.Application.Services.Events.Handlers
 {
-    public class PagamentoAprovadoHandler : INotificationHandler<PagamentoAprovadoEvent>
-    {   
+    public class PagamentoAprovadoHandler(INotificacaoService _notificacaoService) : INotificationHandler<PagamentoAprovadoEvent>
+    {
 
+        private readonly INotificacaoService notificacaoService = _notificacaoService;
 
         public Task Handle(PagamentoAprovadoEvent notification, CancellationToken cancellationToken)
         {
-            Console.WriteLine($"Pagamento aprovado! ID: {notification.PagamentoId}, Valor: R${notification.Valor}");
+            var message = $"Pagamento aprovado! ID: {notification.PagamentoId}, Valor: R${notification.Valor}";
+
+            notificacaoService.NotificarTodosAsync("", message);
+            
             return Task.CompletedTask;
+
         }
 
 

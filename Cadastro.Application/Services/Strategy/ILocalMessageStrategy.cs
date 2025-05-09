@@ -8,6 +8,6 @@ namespace Cadastro.Application.Services.Strategy
 {
     public interface ILocalMessageStrategy
     {
-        public void EnviarMenssagem(string mensagem);
+        public Task EnviarMenssagem(string mensagem);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Cadastro.Application.Error;
+using Cadastro.Application.Return;
 using Cadastro.Application.Services.Abstractions;
 using Cadastro.Application.Services.Event;
 using Cadastro.Application.Services.Factory;
@@ -36,7 +37,7 @@ namespace Cadastro.Application.Services
 
             unitOfWork!.PagamentoRepository!.CreateAsync(pagando.Value!);
 
-            await _mediator.Publish(new PagamentoAprovadoEvent(pagando.Value.PkId, pagando.Value.Valor));
+            await _mediator.Publish(new PagamentoAprovadoEvent(pagando.Value.PkId, pagando.Value.Valor),);
 
             return pagando;
         }
