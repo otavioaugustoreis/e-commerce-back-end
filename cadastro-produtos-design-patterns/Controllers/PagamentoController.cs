@@ -1,11 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Cadastro.Application.Services.Abstractions;
+using Microsoft.AspNetCore.Mvc;
 
 namespace cadastro_produtos_design_patterns.Controllers
 {
     [ApiController]
     [Route("{Controller}")]
-    public class PagamentoController : ControllerBase
+    public class PagamentoController(IPagamentoService _pagamentoService) : ControllerBase
     {
-         private readonly IPagamentoService 
+        private readonly IPagamentoService pagamentoService = _pagamentoService;
+    
+    
     }
+
 }

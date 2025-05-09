@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace cadastro_produtos_design_patterns.Util
 {
-    public static class ScoppedUtil 
+    public static class DIPUtil 
     {
         public static IServiceCollection AddDIP(this IServiceCollection builder)
         {

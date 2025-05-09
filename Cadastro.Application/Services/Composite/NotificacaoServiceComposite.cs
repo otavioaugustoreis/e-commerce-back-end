@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cadastro.Application.Services
+namespace Cadastro.Application.Services.Composite
 {
     public class NotificarService(IEnumerable<ILocalMessageStrategy> _notificacoes) : INotificacaoService
     {
@@ -15,9 +15,9 @@ namespace Cadastro.Application.Services
 
         public async Task NotificarTodosAsync(string destino, string mensagem)
         {
-            foreach(var meio in notificacoes)
+            foreach (var meio in notificacoes)
             {
-               await meio.EnviarMenssagem(mensagem);
+                await meio.EnviarMenssagem(mensagem);
             }
         }
     }
