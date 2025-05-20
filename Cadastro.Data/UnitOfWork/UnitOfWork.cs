@@ -15,8 +15,8 @@ namespace Cadastro.Data.UnitOfWork
     public class UnitOfWork : IUnitOfWork
     {
 
-        private PagamentoRepository pagamentoRepository;
-        private UsuarioRepository usuarioRepository;
+        private IRepository<PagamentoEntity> pagamentoRepository;
+        private IRepository<UsuarioEntity> usuarioRepository;
         
         private AppDbContext appDbContext;
 
@@ -27,8 +27,9 @@ namespace Cadastro.Data.UnitOfWork
             this.appDbContext = appDbContext;
         }
 
-        public PagamentoRepository PagamentoRepository { get => pagamentoRepository ?? new PagamentoRepository(appDbContext); }
-        public UsuarioRepository UsuarioRepository { get => usuarioRepository ?? new UsuarioRepository(appDbContext); }
+        public IRepository<PagamentoEntity> PagamentoRepository { get => pagamentoRepository ?? new PagamentoRepository(appDbContext); }
+        public IRepository<UsuarioEntity> UsuarioRepository { get => usuarioRepository ?? new UsuarioRepository(appDbContext); }
+
 
         public void Commit()
         {

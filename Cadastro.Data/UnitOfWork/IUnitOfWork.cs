@@ -1,4 +1,5 @@
 ﻿using Cadastro.Data.Repositories;
+using Cadastro.Data.Repositories.Pattern;
 using Cadastro.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,8 @@ namespace Cadastro.Data.UnitOfWork
 {
     public interface IUnitOfWork
     {
-        public PagamentoRepository PagamentoRepository { get; }
-        public UsuarioRepository UsuarioRepository { get; }
+        public IRepository<PagamentoEntity> PagamentoRepository { get; }
+        public  IRepository<UsuarioEntity> UsuarioRepository { get; }
         public void Commit();
     }
 }
