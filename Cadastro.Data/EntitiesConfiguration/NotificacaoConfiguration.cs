@@ -17,8 +17,6 @@ namespace Cadastro.Data.EntitiesConfiguration
 
             builder.HasKey(p => p.PkId);
             
-
-
             builder.HasOne(p => p.PedidoEntity)
                 .WithMany(p => p.NotificacaoEntity)
                 .HasForeignKey(p => p.FkPedido);

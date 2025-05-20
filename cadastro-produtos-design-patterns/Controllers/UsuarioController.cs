@@ -1,5 +1,4 @@
-﻿using Cadastro.Application.Error;
-using Cadastro.Application.Services.Abstractions;
+﻿using Cadastro.Application.Services.Abstractions;
 using Cadastro.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,15 +7,12 @@ namespace cadastro_produtos_design_patterns.Controllers
 
     [ApiController]
     [Route("/{Controller}")]
-    public class UsuarioController : ControllerBase
+    public class UsuarioController
+        (IUsuarioService _usuarioService) : ControllerBase
     {
 
-        private readonly IUsuarioService usuarioService;
+        private readonly IUsuarioService usuarioService = _usuarioService;
 
-        public UsuarioController(IUsuarioService usuarioService)
-        {
-            this.usuarioService = usuarioService;
-        }
 
         [HttpPost]
         public async Task<ActionResult<UsuarioEntity>> CadastrarUsuario(UsuarioEntity usuarioEntity)

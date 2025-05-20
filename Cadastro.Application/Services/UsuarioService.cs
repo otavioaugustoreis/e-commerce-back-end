@@ -13,16 +13,13 @@ using System.Threading.Tasks;
 namespace Cadastro.Application.Services
 {
 
-    public class UsuarioService : IUsuarioService
+    public class UsuarioService
+        (IUnitOfWork _unitOfWork) : IUsuarioService
     {
-        public IUnitOfWork unitOfWork { get; set; }
+        private readonly IUnitOfWork unitOfWork = _unitOfWork;
 
-        public UsuarioService(IUnitOfWork unitOfWork)
-        {
-            this.unitOfWork = unitOfWork;
-        }
 
-        public Result<UsuarioEntity> CadastrarUsuario(UsuarioEntity usuarioEntity)
+        public async Task<Result<UsuarioEntity>> Criar(UsuarioEntity usuarioEntity)
         {
             if (usuarioEntity is null) return Result<UsuarioEntity>.Failure("Usuário é nulo");
 
@@ -33,10 +30,19 @@ namespace Cadastro.Application.Services
             return Result<UsuarioEntity>.Success(usuarioEntity);
         }
 
-        public Task<Result<UsuarioEntity>> GetUsuarios()
+        public Task<Result<List<UsuarioEntity>>> Get()
         {
             unitOfWork.UsuarioRepository.GetAsync();
 
+
+            return Task.FromResult(
+                new Result<List<UsuarioEntity>>(true)
+                );
+        }
+
+        public Task<Result<UsuarioEntity>> GetId(int id)
+        {
+            unitOfWork.UsuarioRepository.GetByIdAsync(id);
 
             return Task.FromResult(
                 new Result<UsuarioEntity>(true)

@@ -13,7 +13,6 @@ namespace Cadastro.Application.Return
         public string ErrorMessage { get; private set; }
         public T Value { get; private set; }
 
-
         public Result(bool isSuccess, T value, string errorMessage)
         {
             IsSuccess = isSuccess;

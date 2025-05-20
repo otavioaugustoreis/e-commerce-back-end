@@ -12,6 +12,9 @@ namespace cadastro_produtos_design_patterns.Util
         {
             builder.AddScoped<IUsuarioService, UsuarioService>();
             builder.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.AddScoped<IProdutoService, ProdutoService>();
+            builder.AddScoped<IPedidoItemService, PedidoIte>();
+
 
             return builder;
         }

@@ -16,7 +16,6 @@ namespace Cadastro.Data.Repositories
 
         private readonly AppDbContext appDbContext = _appDbContext;
 
-
         public async Task<NotificacaoEntity> CreateAsync(NotificacaoEntity entity)
         {
             appDbContext.Add(entity);

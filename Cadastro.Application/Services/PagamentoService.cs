@@ -15,20 +15,15 @@ using System.Threading.Tasks;
 
 namespace Cadastro.Application.Services
 {
-    public class PagamentoService : IPagamentoService
+    public class PagamentoService 
+        (IPagamentoFactory _pagamentoFactory, IUnitOfWork _unitOfWork, IMediator mediator, IPedidoService _pedidoService) : IPagamentoService
     {
-        private readonly IPagamentoFactory pagamentoFactory;
-        private readonly IUnitOfWork unitOfWork;
-        private readonly IMediator _mediator;
+        private readonly IPagamentoFactory pagamentoFactory = _pagamentoFactory;
+        private readonly IUnitOfWork unitOfWork = _unitOfWork;
+        private readonly IMediator _mediator = mediator;
+        private readonly IPedidoService pedidoService = _pedidoService;  
 
-        public PagamentoService(IPagamentoFactory pagamentoFactory, IUnitOfWork unitOfWork, IMediator mediator)
-        {
-            this.pagamentoFactory = pagamentoFactory;
-            this.unitOfWork = unitOfWork;
-            this._mediator = mediator;
-        }
-
-        public async  Task<Result<PagamentoEntity>> Pagar(PagamentoEntity pagamento)
+        public async  Task<Result<PagamentoEntity>> Criar(PagamentoEntity pagamento)
         {
 
             IPagamentoStrategy result = pagamentoFactory.RetornarPagamento(pagamento.TipoPagamento);
@@ -39,6 +34,16 @@ namespace Cadastro.Application.Services
             await _mediator.Publish(new PagamentoAprovadoEvent(pagando.Value.PkId, pagando.Value.Valor));
 
             return pagando;
+        }
+
+        public Task<Result<List<PagamentoEntity>>> Get()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Result<PagamentoEntity>> GetId(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

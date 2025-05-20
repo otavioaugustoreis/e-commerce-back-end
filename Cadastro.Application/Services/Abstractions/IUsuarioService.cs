@@ -5,9 +5,8 @@ using System.Runtime.CompilerServices;
 
 namespace Cadastro.Application.Services.Abstractions
 {
-    public interface IUsuarioService
+    public interface IUsuarioService : IService<UsuarioEntity>
     {
-        Result<UsuarioEntity> CadastrarUsuario(UsuarioEntity usuarioEntity);
-        Task<Result<UsuarioEntity>> GetUsuarios();
+        
     }
 }
