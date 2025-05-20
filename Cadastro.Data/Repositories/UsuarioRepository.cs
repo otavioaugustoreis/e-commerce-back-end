@@ -10,15 +10,11 @@ using System.Threading.Tasks;
 
 namespace Cadastro.Data.Repositories
 {
-    public class UsuarioRepository : IRepository<UsuarioEntity>
+    public class UsuarioRepository
+        (AppDbContext _appDbContext) : IRepository<UsuarioEntity>
     {
 
-        private readonly AppDbContext appDbContext;
-
-        public UsuarioRepository(AppDbContext appDbContext)
-        {
-            this.appDbContext = appDbContext;
-        }
+        private readonly AppDbContext appDbContext = _appDbContext;
 
         public async Task<UsuarioEntity> CreateAsync(UsuarioEntity entity)
         {

@@ -1,4 +1,5 @@
-﻿using Cadastro.Data.Repositories.Pattern;
+﻿using Cadastro.Data.Data;
+using Cadastro.Data.Repositories.Pattern;
 using Cadastro.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,31 +9,39 @@ using System.Threading.Tasks;
 
 namespace Cadastro.Data.Repositories
 {
-    public class PedidoItemRepository : IRepository<PedidoItemEntity>
+    public class PedidoItemRepository
+        (AppDbContext _appDbContext) : IRepository<PedidoItemEntity>
     {
-        public Task<PedidoItemEntity> CreateAsync(PedidoItemEntity entity)
+
+        private readonly AppDbContext appDbContext = _appDbContext;
+
+        public async Task<PedidoItemEntity> CreateAsync(PedidoItemEntity entity)
         {
-            throw new NotImplementedException();
+            appDbContext.Add<PedidoItemEntity>(entity);
+            return entity;
         }
 
-        public Task<IEnumerable<PedidoItemEntity>> GetAsync()
+        public async Task<IEnumerable<PedidoItemEntity>> GetAsync()
         {
-            throw new NotImplementedException();
+            return appDbContext._PedidoItem.ToList();
         }
 
-        public Task<PedidoItemEntity> GetByIdAsync(int? id)
+        public async Task<PedidoItemEntity> GetByIdAsync(int? id)
         {
-            throw new NotImplementedException();
+            return appDbContext._PedidoItem.FirstOrDefault(p => p.PkId == id);
         }
 
-        public Task<PedidoItemEntity> RemoveAsync(PedidoItemEntity entity)
+        public async Task<PedidoItemEntity> RemoveAsync(PedidoItemEntity entity)
         {
-            throw new NotImplementedException();
+            appDbContext.Remove<PedidoItemEntity>(entity);
+            return entity;
         }
 
-        public Task<PedidoItemEntity> UpdateAsync(PedidoItemEntity entity)
+        public async Task<PedidoItemEntity> UpdateAsync(PedidoItemEntity entity)
         {
-            throw new NotImplementedException();
+
+            appDbContext.Update<PedidoItemEntity>(entity);
+            return entity;
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using Cadastro.Data.Repositories.Pattern;
+﻿using Cadastro.Data.Data;
+using Cadastro.Data.Repositories.Pattern;
 using Cadastro.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,31 +10,40 @@ using System.Threading.Tasks;
 
 namespace Cadastro.Data.Repositories
 {
-    public class ProdutoRepository : IRepository<ProdutoEntity>
+    public class ProdutoRepository
+        (AppDbContext _appDbContext) : IRepository<ProdutoEntity>
     {
-        public Task<ProdutoEntity> CreateAsync(ProdutoEntity entity)
+
+        private readonly AppDbContext appDbContext = _appDbContext;
+
+        public async Task<ProdutoEntity> CreateAsync(ProdutoEntity entity)
         {
-            throw new NotImplementedException();
+            appDbContext.Add(entity);
+            return entity;
         }
 
-        public Task<IEnumerable<ProdutoEntity>> GetAsync()
+        public async Task<IEnumerable<ProdutoEntity>> GetAsync()
         {
-            throw new NotImplementedException();
+            return await appDbContext._Produto.ToListAsync();
         }
 
         public Task<ProdutoEntity> GetByIdAsync(int? id)
         {
-            throw new NotImplementedException();
+            var produto = appDbContext._Produto.FirstOrDefault(p => p.PkId == id);
+            return Task<ProdutoEntity>.FromResult(produto);
         }
 
         public Task<ProdutoEntity> RemoveAsync(ProdutoEntity entity)
         {
-            throw new NotImplementedException();
+            appDbContext.Remove(entity);
+
+            return Task.FromResult(entity);
         }
 
-        public Task<ProdutoEntity> UpdateAsync(ProdutoEntity entity)
+        public async Task<ProdutoEntity> UpdateAsync(ProdutoEntity entity)
         {
-            throw new NotImplementedException();
+            appDbContext.Update(entity);
+            return entity;
         }
     }
 }

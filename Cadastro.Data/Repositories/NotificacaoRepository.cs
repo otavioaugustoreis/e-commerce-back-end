@@ -1,5 +1,7 @@
-﻿using Cadastro.Data.Repositories.Pattern;
+﻿using Cadastro.Data.Data;
+using Cadastro.Data.Repositories.Pattern;
 using Cadastro.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,31 +10,40 @@ using System.Threading.Tasks;
 
 namespace Cadastro.Data.Repositories
 {
-    public class NotificacaoRepository : IRepository<NotificacaoEntity>
+    public class NotificacaoRepository
+        (AppDbContext _appDbContext) : IRepository<NotificacaoEntity>
     {
-        public Task<NotificacaoEntity> CreateAsync(NotificacaoEntity entity)
+
+        private readonly AppDbContext appDbContext = _appDbContext;
+
+
+        public async Task<NotificacaoEntity> CreateAsync(NotificacaoEntity entity)
         {
-            throw new NotImplementedException();
+            appDbContext.Add(entity);
+            return entity;
         }
 
-        public Task<IEnumerable<NotificacaoEntity>> GetAsync()
+        public async Task<IEnumerable<NotificacaoEntity>> GetAsync()
         {
-            throw new NotImplementedException();
+            return await appDbContext._Notificacao.ToListAsync();
         }
 
-        public Task<NotificacaoEntity> GetByIdAsync(int? id)
+        public async Task<NotificacaoEntity> GetByIdAsync(int? id)
         {
-            throw new NotImplementedException();
+            var entity = appDbContext._Notificacao.FirstOrDefault(p => p.PkId == id);
+            return entity;
         }
 
-        public Task<NotificacaoEntity> RemoveAsync(NotificacaoEntity entity)
+        public async Task<NotificacaoEntity> RemoveAsync(NotificacaoEntity entity)
         {
-            throw new NotImplementedException();
+            appDbContext.Remove(entity);
+            return entity;
         }
 
-        public Task<NotificacaoEntity> UpdateAsync(NotificacaoEntity entity)
+        public async Task<NotificacaoEntity> UpdateAsync(NotificacaoEntity entity)
         {
-            throw new NotImplementedException();
+            appDbContext.Update(entity);
+            return entity;
         }
     }
 }

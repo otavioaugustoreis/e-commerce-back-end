@@ -1,4 +1,5 @@
-﻿using Cadastro.Data.Repositories.Pattern;
+﻿using Cadastro.Data.Data;
+using Cadastro.Data.Repositories.Pattern;
 using Cadastro.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,31 +9,41 @@ using System.Threading.Tasks;
 
 namespace Cadastro.Data.Repositories
 {
-    internal class PedidoRepository : IRepository<PedidoEntity>
+    public class PedidoRepository
+        (AppDbContext _appDbContext) : IRepository<PedidoEntity>
     {
-        public Task<PedidoEntity> CreateAsync(PedidoEntity entity)
+
+        private readonly AppDbContext appDbContext = _appDbContext;
+
+
+        public async Task<PedidoEntity> CreateAsync(PedidoEntity entity)
         {
-            throw new NotImplementedException();
+            appDbContext.Add(entity);
+            return entity;
         }
 
-        public Task<IEnumerable<PedidoEntity>> GetAsync()
+        public async Task<IEnumerable<PedidoEntity>> GetAsync()
         {
-            throw new NotImplementedException();
+            return appDbContext._Pedido.ToList();
         }
 
-        public Task<PedidoEntity> GetByIdAsync(int? id)
+        public async Task<PedidoEntity> GetByIdAsync(int? id)
         {
-            throw new NotImplementedException();
+            return appDbContext._Pedido.FirstOrDefault(p => p.PkId == id);
         }
 
-        public Task<PedidoEntity> RemoveAsync(PedidoEntity entity)
+        public async Task<PedidoEntity> RemoveAsync(PedidoEntity entity)
         {
-            throw new NotImplementedException();
+
+            appDbContext.Remove(entity);
+            return entity;
         }
 
-        public Task<PedidoEntity> UpdateAsync(PedidoEntity entity)
+        public async Task<PedidoEntity> UpdateAsync(PedidoEntity entity)
         {
-            throw new NotImplementedException();
+            appDbContext.Update(entity);
+            appDbContext.Update(entity);
+            return entity;
         }
     }
 }

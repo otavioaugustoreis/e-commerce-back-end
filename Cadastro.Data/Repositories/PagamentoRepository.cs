@@ -1,6 +1,7 @@
 ﻿using Cadastro.Data.Data;
 using Cadastro.Data.Repositories.Pattern;
 using Cadastro.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,40 +10,38 @@ using System.Threading.Tasks;
 
 namespace Cadastro.Data.Repositories
 {
-    public class PagamentoRepository : IRepository<PagamentoEntity>
+    public class PagamentoRepository
+        (AppDbContext _appDbContext) : IRepository<PagamentoEntity>
     {
 
-        private readonly AppDbContext appDbContext;
+        private readonly AppDbContext appDbContext = _appDbContext;
 
-        public PagamentoRepository(AppDbContext appDbContext)
-        {
-            this.appDbContext = appDbContext;
-        }
-
-        public Task<PagamentoEntity> CreateAsync(PagamentoEntity entity)
+        public async Task<PagamentoEntity> CreateAsync(PagamentoEntity entity)
         {
             appDbContext.Add(entity);
-            return Task.FromResult(entity);
+            return entity;
         }
 
-        public Task<IEnumerable<PagamentoEntity>> GetAsync()
+        public async Task<IEnumerable<PagamentoEntity>> GetAsync()
         {
-            throw new NotImplementedException();
+            return appDbContext._Pagamento.ToList();
         }
 
-        public Task<PagamentoEntity> GetByIdAsync(int? id)
+        public async Task<PagamentoEntity> GetByIdAsync(int? id)
         {
-            throw new NotImplementedException();
+            return appDbContext._Pagamento.FirstOrDefault(p => p.PkId == id);
         }
 
-        public Task<PagamentoEntity> RemoveAsync(PagamentoEntity entity)
+        public async Task<PagamentoEntity> RemoveAsync(PagamentoEntity entity)
         {
-            throw new NotImplementedException();
+            appDbContext.Remove(entity);
+            return entity;
         }
 
-        public Task<PagamentoEntity> UpdateAsync(PagamentoEntity entity)
+        public async Task<PagamentoEntity> UpdateAsync(PagamentoEntity entity)
         {
-            throw new NotImplementedException();
+            appDbContext.Update(entity);
+            return entity;
         }
     }
 }
