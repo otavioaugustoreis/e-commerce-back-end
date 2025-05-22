@@ -13,6 +13,10 @@ namespace Cadastro.Data.UnitOfWork
     {
         public IRepository<PagamentoEntity> PagamentoRepository { get; }
         public  IRepository<UsuarioEntity> UsuarioRepository { get; }
+        public IRepository<NotificacaoEntity> NotificacaoNotify { get; }
+        public IRepository<PedidoEntity> PedidoRepository { get; }
+        public IRepository<PedidoItemEntity> PedidoItemRepository { get; }
+        public IRepository<ProdutoEntity> ProdutoRepository { get; }
         public void Commit();
     }
 }
