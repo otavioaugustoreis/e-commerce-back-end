@@ -25,7 +25,7 @@ namespace Cadastro.Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<Result<List<PedidoEntity>>> Get()
+        public Task<Result<IEnumerable<PedidoEntity>>> Get()
         {
             throw new NotImplementedException();
         }
