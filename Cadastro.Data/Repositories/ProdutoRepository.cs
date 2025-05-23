@@ -27,10 +27,11 @@ namespace Cadastro.Data.Repositories
             return await appDbContext._Produto.ToListAsync();
         }
 
-        public Task<ProdutoEntity> GetByIdAsync(int? id)
+        public async Task<ProdutoEntity> GetByIdAsync(int? id)
         {
             var produto = appDbContext._Produto.FirstOrDefault(p => p.PkId == id);
-            return Task<ProdutoEntity>.FromResult(produto);
+
+            return produto;
         }
 
         public Task<ProdutoEntity> RemoveAsync(ProdutoEntity entity)

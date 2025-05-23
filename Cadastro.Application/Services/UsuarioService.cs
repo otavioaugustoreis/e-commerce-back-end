@@ -27,26 +27,22 @@ namespace Cadastro.Application.Services
             unitOfWork.UsuarioRepository.CreateAsync(usuarioEntity);
 
 
-            return Result<UsuarioEntity>.Success(usuarioEntity);
+            return Result<UsuarioEntity>.Success(usuarioEntity, "Usuario Cadastrado");
         }
 
-        public Task<Result<List<UsuarioEntity>>> Get()
+        public async Task<Result<IEnumerable<UsuarioEntity>>> Get()
         {
-            unitOfWork.UsuarioRepository.GetAsync();
+            var usuarios = unitOfWork.UsuarioRepository.GetAsync();
 
-
-            return Task.FromResult(
-                new Result<List<UsuarioEntity>>(true)
-                );
+            return Result<IEnumerable<UsuarioEntity>>.Success(usuarios.Result);
         }
 
-        public Task<Result<UsuarioEntity>> GetId(int id)
+        public async Task<Result<UsuarioEntity>> GetId(int id)
         {
-            unitOfWork.UsuarioRepository.GetByIdAsync(id);
+            var usuarios = unitOfWork.UsuarioRepository.GetByIdAsync(id);
 
-            return Task.FromResult(
-                new Result<UsuarioEntity>(true)
-                );
+            return Result<UsuarioEntity>.Success(usuarios.Result);
+              
         }
     }
 }

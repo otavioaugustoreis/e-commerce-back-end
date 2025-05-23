@@ -11,7 +11,7 @@ namespace Cadastro.Application.Services.Abstractions
     public interface IService<T>
     {
         Task<Result<T>> Criar(T entity);
-        Task<Result<List<T>>> Get();
+        Task<Result<IEnumerable<T>>> Get();
         Task<Result<T>> GetId(int id);
     }
 }

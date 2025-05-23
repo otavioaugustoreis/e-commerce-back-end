@@ -2,6 +2,7 @@
 using Cadastro.Application.Services.Abstractions;
 using Cadastro.Data.UnitOfWork;
 using Cadastro.Domain.Entities;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,19 +17,37 @@ namespace Cadastro.Application.Services
 
         private readonly IUnitOfWork unitOfWork = _unitOfWork;
 
-        public Task<Result<ProdutoEntity>> Criar(ProdutoEntity entity)
+        public async Task<Result<ProdutoEntity>> Criar(ProdutoEntity entity)
         {
-            throw new NotImplementedException();
+            var produtoCadastrado = unitOfWork.ProdutoRepository.CreateAsync(entity);
+
+            return Result<ProdutoEntity>.Success(produtoCadastrado.Result, "Produto cadastrado com sucesso");
         }
 
-        public Task<Result<List<ProdutoEntity>>> Get()
+        public async  Task<Result<IEnumerable<ProdutoEntity>>> Get()
         {
-            throw new NotImplementedException();
+
+            var products = unitOfWork.ProdutoRepository.GetAsync();
+
+            if (products.Result.Any())
+            {
+            return Result<IEnumerable<ProdutoEntity>>.Failure("Não existem produtos cadastrado");
+            }
+            
+            return Result<IEnumerable<ProdutoEntity>>.Success(products.Result);
         }
 
-        public Task<Result<ProdutoEntity>> GetId(int id)
+        public async Task<Result<ProdutoEntity>> GetId(int id)
         {
-            throw new NotImplementedException();
+
+            var produto = unitOfWork.ProdutoRepository.GetByIdAsync(id);
+
+            if(produto is null)
+            {
+                return Result<ProdutoEntity>.Failure("O produto não foi encontrado");
+            }
+
+            return Result<ProdutoEntity>.Success(produto.Result);
         }
     }
 }
