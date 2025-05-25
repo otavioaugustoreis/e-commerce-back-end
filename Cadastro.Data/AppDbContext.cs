@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cadastro.Data.Data
+namespace Cadastro.Data
 {
     public class AppDbContext : DbContext
     {

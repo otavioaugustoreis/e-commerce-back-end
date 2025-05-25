@@ -5,6 +5,7 @@ using Cadastro.Data.Repositories.Pattern;
 using Cadastro.Data.UnitOfWork;
 using Cadastro.Domain.Entities;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,13 +29,14 @@ namespace Cadastro.Application.Services
 
 
             return Result<UsuarioEntity>.Success(usuarioEntity, "Usuario Cadastrado");
-        }
+         
+       }
 
         public async Task<Result<IEnumerable<UsuarioEntity>>> Get()
         {
-            var usuarios = unitOfWork.UsuarioRepository.GetAsync();
+            var usuarios = await unitOfWork.UsuarioRepository.GetAsync();
 
-            return Result<IEnumerable<UsuarioEntity>>.Success(usuarios.Result);
+            return Result<IEnumerable<UsuarioEntity>>.Success(usuarios);
         }
 
         public async Task<Result<UsuarioEntity>> GetId(int id)

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Cadastro.Application.Services.Composite
 {
-    public class NotificarService(IEnumerable<ILocalMessageStrategy> _notificacoes) : INotificacaoService
+    public class NotificacaoServiceComposite(IEnumerable<ILocalMessageStrategy> _notificacoes) : INotificacaoService
     {
         private readonly IEnumerable<ILocalMessageStrategy> notificacoes = _notificacoes;
 

@@ -1,5 +1,8 @@
 using Cadastro.Application.Services;
+using Cadastro.Data;
+using cadastro_produtos_design_patterns.Util;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +13,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(p => { 
 });
+
+string mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddConectionBD(mySqlConnection!);
+builder.Services.AddMapper();
+builder.Services.AddDIP();
 
 
 builder.Services.AddMediatR(cfg =>

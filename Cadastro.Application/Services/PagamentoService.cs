@@ -16,27 +16,31 @@ using System.Threading.Tasks;
 namespace Cadastro.Application.Services
 {
     public class PagamentoService 
-        (IPagamentoFactory _pagamentoFactory, IUnitOfWork _unitOfWork, IMediator mediator, IPedidoService _pedidoService) : IPagamentoService
+        (IPagamentoFactory _pagamentoFactory,
+        IUnitOfWork _unitOfWork, 
+        IMediator mediator,
+        IPedidoService _pedidoService) : IPagamentoService
     {
         private readonly IPagamentoFactory pagamentoFactory = _pagamentoFactory;
         private readonly IUnitOfWork unitOfWork = _unitOfWork;
         private readonly IMediator _mediator = mediator;
         private readonly IPedidoService pedidoService = _pedidoService;  
 
-        public async  Task<Result<PagamentoEntity>> Criar(PagamentoEntity pagamento)
+        public  async  Task<Result<PagamentoEntity>> Criar(PagamentoEntity pagamento)
         {
 
             IPagamentoStrategy result = pagamentoFactory.RetornarPagamento(pagamento.TipoPagamento);
+           
             var pagando = result.Pagar(pagamento);
 
-            unitOfWork!.PagamentoRepository!.CreateAsync(pagando.Value!);
+            await unitOfWork!.PagamentoRepository!.CreateAsync(pagando.Value!);
 
             await _mediator.Publish(new PagamentoAprovadoEvent(pagando.Value.PkId, pagando.Value.Valor));
 
             return pagando;
         }
 
-        public Task<Result<List<PagamentoEntity>>> Get()
+        public Task<Result<IEnumerable<PagamentoEntity>>> Get()
         {
             throw new NotImplementedException();
         }

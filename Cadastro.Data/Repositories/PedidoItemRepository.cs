@@ -1,5 +1,4 @@
-﻿using Cadastro.Data.Data;
-using Cadastro.Data.Repositories.Pattern;
+﻿using Cadastro.Data.Repositories.Pattern;
 using Cadastro.Domain.Entities;
 using System;
 using System.Collections.Generic;

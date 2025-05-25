@@ -1,5 +1,4 @@
-﻿using Cadastro.Data.Data;
-using Cadastro.Data.Repositories;
+﻿using Cadastro.Data.Repositories;
 using Cadastro.Data.Repositories.Pattern;
 using Cadastro.Domain.Entities;
 using System;
@@ -12,24 +11,25 @@ using System.Threading.Tasks;
 
 namespace Cadastro.Data.UnitOfWork
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork(
+            IRepository<PagamentoEntity> _pagamentoRepository,
+            IRepository<UsuarioEntity> _usuarioRepository,
+            IRepository<NotificacaoEntity> _notificaoRepository,
+            IRepository<PedidoEntity> _pedidoRepository,
+            IRepository<PedidoItemEntity> _pedidoItemRepository,
+            IRepository<ProdutoEntity> _produtoRepository,
+            AppDbContext _appDbContext) : IUnitOfWork
     {
-        private IRepository<PagamentoEntity> pagamentoRepository;
-        private IRepository<UsuarioEntity> usuarioRepository;
-        private IRepository<NotificacaoEntity> notificaoRepository;
-        private IRepository<PedidoEntity> pedidoRepository;
-        private IRepository<PedidoItemEntity> pedidoItemRepository;
-        private IRepository<ProdutoEntity> produtoRepository;
+        private readonly IRepository<PagamentoEntity> pagamentoRepository = _pagamentoRepository;
+        private readonly IRepository<UsuarioEntity> usuarioRepository = _usuarioRepository;
+        private readonly IRepository<NotificacaoEntity> notificaoRepository = _notificaoRepository;
+        private readonly IRepository<PedidoEntity> pedidoRepository = _pedidoRepository;
+        private readonly IRepository<PedidoItemEntity> pedidoItemRepository = _pedidoItemRepository;
+        private readonly IRepository<ProdutoEntity> produtoRepository = _produtoRepository;
 
-        private AppDbContext appDbContext;
+        private readonly AppDbContext appDbContext = _appDbContext;
 
-        public UnitOfWork(PagamentoRepository pagamentoRepository, UsuarioRepository usuarioRepository, AppDbContext appDbContext)
-        {
-            this.pagamentoRepository = pagamentoRepository;
-            this.usuarioRepository = usuarioRepository;
-            this.appDbContext = appDbContext;
-        }
-
+       
         public IRepository<PagamentoEntity> PagamentoRepository { get => pagamentoRepository ?? new PagamentoRepository(appDbContext); }
         public IRepository<UsuarioEntity> UsuarioRepository { get => usuarioRepository ?? new UsuarioRepository(appDbContext); }
 
