@@ -22,6 +22,9 @@ namespace Cadastro.Data.EntitiesConfiguration
 
             builder.Property(p => p.TipoPagamento)
                 .HasConversion<string>();
+
+            builder.Property(p => p.Valor)
+                .HasPrecision(10, 2);
         }
     }
 }

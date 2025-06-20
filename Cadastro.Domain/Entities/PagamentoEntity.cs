@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Cadastro.Domain.Entities
 {
-    public abstract class PagamentoEntity : BaseEntity
+    public  class PagamentoEntity : BaseEntity
     {
         public PedidoEntity PedidoEntity { get; set; }
         public decimal Valor { get; set; }
@@ -21,7 +21,7 @@ namespace Cadastro.Domain.Entities
         public int? Parcelas { get; set; } 
         public PagamentoEntity() { }
 
-        protected PagamentoEntity(TipoPagamento TipoPagamento) 
+        public  PagamentoEntity(TipoPagamento TipoPagamento) 
         {
         }
 
