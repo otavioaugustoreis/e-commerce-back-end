@@ -16,5 +16,6 @@ namespace Cadastro.Domain.Entities
         public UsuarioEntity() : base()
         {
         }
+        public string[]  Roles { get; set; }
     }
 }

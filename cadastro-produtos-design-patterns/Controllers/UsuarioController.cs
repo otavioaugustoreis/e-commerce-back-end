@@ -21,10 +21,7 @@ namespace cadastro_produtos_design_patterns.Controllers
         [HttpPost]
         public async Task<ActionResult<UsuarioEntity>> CadastrarUsuario(UsuarioModelRequest usuarioEntity)
         {
-
-            
             var usuarios = usuarioService.Get();
-
 
             var usuariosModelResponse = mapper.Map<List<UsuarioModelResponse>>(usuarios.Result);
             
