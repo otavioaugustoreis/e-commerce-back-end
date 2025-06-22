@@ -13,7 +13,7 @@ namespace Cadastro.Data.UnitOfWork
 {
     public class UnitOfWork(
             IRepository<PagamentoEntity> _pagamentoRepository,
-            IRepository<UsuarioEntity> _usuarioRepository,
+            IUsuarioRepository _usuarioRepository,
             IRepository<NotificacaoEntity> _notificaoRepository,
             IRepository<PedidoEntity> _pedidoRepository,
             IRepository<PedidoItemEntity> _pedidoItemRepository,
@@ -21,7 +21,7 @@ namespace Cadastro.Data.UnitOfWork
             AppDbContext _appDbContext) : IUnitOfWork
     {
         private readonly IRepository<PagamentoEntity> pagamentoRepository = _pagamentoRepository;
-        private readonly IRepository<UsuarioEntity> usuarioRepository = _usuarioRepository;
+        private readonly IUsuarioRepository usuarioRepository = _usuarioRepository;
         private readonly IRepository<NotificacaoEntity> notificaoRepository = _notificaoRepository;
         private readonly IRepository<PedidoEntity> pedidoRepository = _pedidoRepository;
         private readonly IRepository<PedidoItemEntity> pedidoItemRepository = _pedidoItemRepository;
@@ -31,7 +31,7 @@ namespace Cadastro.Data.UnitOfWork
 
        
         public IRepository<PagamentoEntity> PagamentoRepository { get => pagamentoRepository ?? new PagamentoRepository(appDbContext); }
-        public IRepository<UsuarioEntity> UsuarioRepository { get => usuarioRepository ?? new UsuarioRepository(appDbContext); }
+        public IUsuarioRepository UsuarioRepository { get => usuarioRepository ?? new UsuarioRepository(appDbContext); }
 
         public IRepository<NotificacaoEntity> NotificacaoNotify { get => notificaoRepository ?? new NotificacaoRepository(appDbContext); }
 

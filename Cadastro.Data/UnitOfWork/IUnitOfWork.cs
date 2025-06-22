@@ -12,7 +12,7 @@ namespace Cadastro.Data.UnitOfWork
     public interface IUnitOfWork
     {
         public IRepository<PagamentoEntity> PagamentoRepository { get; }
-        public  IRepository<UsuarioEntity> UsuarioRepository { get; }
+        public IUsuarioRepository UsuarioRepository { get; }
         public IRepository<NotificacaoEntity> NotificacaoNotify { get; }
         public IRepository<PedidoEntity> PedidoRepository { get; }
         public IRepository<PedidoItemEntity> PedidoItemRepository { get; }

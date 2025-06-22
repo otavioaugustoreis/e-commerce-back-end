@@ -24,12 +24,9 @@ namespace Cadastro.Application.Services
         {
             if (usuarioEntity is null) return Result<UsuarioEntity>.Failure("Usuário é nulo");
 
-
             unitOfWork.UsuarioRepository.CreateAsync(usuarioEntity);
 
-
-            return Result<UsuarioEntity>.Success(usuarioEntity, "Usuario Cadastrado");
-         
+            return Result<UsuarioEntity>.Success(usuarioEntity, "Usuario cadastrado com sucesso.");
        }
 
         public async Task<Result<IEnumerable<UsuarioEntity>>> Get()
@@ -41,10 +38,19 @@ namespace Cadastro.Application.Services
 
         public async Task<Result<UsuarioEntity>> GetId(int id)
         {
-            var usuarios = unitOfWork.UsuarioRepository.GetByIdAsync(id);
+            var usuarios = await unitOfWork.UsuarioRepository.GetByIdAsync(id);
 
-            return Result<UsuarioEntity>.Success(usuarios.Result);
+            return Result<UsuarioEntity>.Success(usuarios);
               
+        }
+
+        public async Task<Result<UsuarioEntity>> GetUsuarioEmailSenha(string email)
+        {
+            var usuario = await unitOfWork.UsuarioRepository.GetUsuarioByEmail(email);
+
+            if (usuario is null) return Result<UsuarioEntity>.Failure("Usuário não encontrado");
+
+            return Result<UsuarioEntity>.Success(usuario);
         }
     }
 }

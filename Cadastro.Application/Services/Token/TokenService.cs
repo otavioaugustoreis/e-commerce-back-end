@@ -1,4 +1,5 @@
-﻿using Cadastro.Domain.Entities;
+﻿using Cadastro.Application.Services.Abstractions;
+using Cadastro.Domain.Entities;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Cadastro.Application.Services.Token
 {
-    public class TokenService
+    public class TokenService : ITokenService
     {
         public string Generate(UsuarioEntity usuarioEntity)
         {
@@ -49,12 +50,8 @@ namespace Cadastro.Application.Services.Token
             {
                 claims.AddClaim(new Claim(ClaimTypes.Role, role));
             }
-            
-            
+
             return claims;
-
-
-
         }
     }
 }

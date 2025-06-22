@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 
 namespace Cadastro.Data.EntitiesConfiguration
 {
-    public class UsuarioConfiguration : IEntityTypeConfiguration<UsuarioEntity>
+    public class LoginConfiguration : IEntityTypeConfiguration<LoginEntity>
     {
-        public void Configure(EntityTypeBuilder<UsuarioEntity> builder)
+        public void Configure(EntityTypeBuilder<LoginEntity> builder)
         {
-            builder.ToTable("TB_USUARIO");
+            builder.ToTable("TB_LOGIN");
 
             builder.HasKey(p => p.PkId);
 
-            builder.HasMany(p => p.PedidoEntity)
-                .WithOne(p => p.UsuarioEntity)
-                .HasForeignKey(p => p.FkUsuario);
+            builder.Property(p => p.Email)
+                .HasColumnType("varchar(50)")
+                .HasColumnName("ds_email");
         }
     }
 }

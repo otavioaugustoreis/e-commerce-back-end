@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Cadastro.Data.Repositories
 {
     public class UsuarioRepository
-        (AppDbContext _appDbContext) : IRepository<UsuarioEntity>
+        (AppDbContext _appDbContext) : IUsuarioRepository
     {
 
         private readonly AppDbContext appDbContext = _appDbContext;
@@ -26,15 +26,17 @@ namespace Cadastro.Data.Repositories
             return await appDbContext._Usuario.ToListAsync();
         }
 
+        public async Task<UsuarioEntity> GetUsuarioByEmail(string email)
+        {
+            return await appDbContext._Usuario.FirstOrDefaultAsync(p => p.Email.Trim().ToLower().Equals(email));
+        }
+
         public async Task<UsuarioEntity> GetByIdAsync(int? id)
         {
-            var usuario =  appDbContext._Usuario.FirstOrDefault(p => p.PkId == id);
-
-            return  usuario;
+            return await appDbContext._Usuario.FirstOrDefaultAsync(p => p.PkId == id);
         }
         public async Task<UsuarioEntity> RemoveAsync(UsuarioEntity entity)
         {
-
              appDbContext._Usuario.Remove(entity);
             return entity;
         }

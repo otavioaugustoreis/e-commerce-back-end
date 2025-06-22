@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
 
 
-
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
@@ -19,7 +18,7 @@ string? mySqlConnection = builder.Configuration.GetConnectionString("DefaultConn
 builder.Services.AddConectionBD(mySqlConnection!);
 builder.Services.AddMapper();
 builder.Services.AddDIP();
-
+builder.Services.AddJwtConfiguration();
 
 builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(PagamentoService).Assembly));
