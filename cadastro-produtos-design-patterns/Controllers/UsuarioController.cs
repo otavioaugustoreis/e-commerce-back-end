@@ -9,7 +9,7 @@ namespace cadastro_produtos_design_patterns.Controllers
 {
 
     [ApiController]
-    [Route("/{Controller}")]
+    [Route("/[Controller]")]
     public class UsuarioController
         (IUsuarioService _usuarioService,
         IMapper _mapper) : ControllerBase
@@ -18,14 +18,28 @@ namespace cadastro_produtos_design_patterns.Controllers
         private readonly IUsuarioService usuarioService = _usuarioService;
         private readonly IMapper mapper = _mapper; 
 
-        [HttpPost]
-        public async Task<ActionResult<UsuarioEntity>> CadastrarUsuario(UsuarioModelRequest usuarioEntity)
+        [HttpPost("inserir")]
+        public async Task<ActionResult<UsuarioEntity>> CadastrarUsuario([FromBody]UsuarioModelRequest usuarioEntity)
         {
-            var usuarios = usuarioService.Get();
-
-            var usuariosModelResponse = mapper.Map<List<UsuarioModelResponse>>(usuarios.Result);
             
-            return Ok();
+            var usuario = mapper.Map<UsuarioEntity>(usuarioEntity);
+
+            var usuarioCriado = await usuarioService.Criar(usuario);
+            
+            return Ok(new
+                        { Usuario = usuarioCriado.Value,
+                          Message = usuarioCriado.SuccessMessage,
+                     });
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<UsuarioEntity>>> GetUsuarios()
+        {
+            var usuarios = await usuarioService.Get();
+
+            var usuariosModelResponse = mapper.Map<List<UsuarioModelResponse>>(usuarios);
+
+            return Ok(usuariosModelResponse);
         }
     }
 }

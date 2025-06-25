@@ -12,6 +12,6 @@ namespace cadastro_produtos_design_patterns.Model.Request
     {
         public  string DsNome { get; set; }
         public int NrIdade   { get; set; }
-        
+        public string DsEmail { get; set; }
     }
 }

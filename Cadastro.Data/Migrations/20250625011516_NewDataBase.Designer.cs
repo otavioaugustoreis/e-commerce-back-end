@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cadastro.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250620192432_AjusteMigration")]
-    partial class AjusteMigration
+    [Migration("20250625011516_NewDataBase")]
+    partial class NewDataBase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,31 @@ namespace Cadastro.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Cadastro.Domain.Entities.LoginEntity", b =>
+                {
+                    b.Property<int>("PkId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PkId"));
+
+                    b.Property<DateTime>("DhInclusao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("ds_email");
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PkId");
+
+                    b.ToTable("TB_LOGIN", (string)null);
+                });
 
             modelBuilder.Entity("Cadastro.Domain.Entities.NotificacaoEntity", b =>
                 {
@@ -186,6 +211,11 @@ namespace Cadastro.Data.Migrations
 
                     b.Property<DateTime>("DhInclusao")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("DsEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ds_email");
 
                     b.Property<string>("DsNome")
                         .IsRequired()

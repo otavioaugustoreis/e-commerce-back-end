@@ -22,6 +22,31 @@ namespace Cadastro.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Cadastro.Domain.Entities.LoginEntity", b =>
+                {
+                    b.Property<int>("PkId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PkId"));
+
+                    b.Property<DateTime>("DhInclusao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("ds_email");
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PkId");
+
+                    b.ToTable("TB_LOGIN", (string)null);
+                });
+
             modelBuilder.Entity("Cadastro.Domain.Entities.NotificacaoEntity", b =>
                 {
                     b.Property<int>("PkId")
@@ -183,6 +208,11 @@ namespace Cadastro.Data.Migrations
 
                     b.Property<DateTime>("DhInclusao")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("DsEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ds_email");
 
                     b.Property<string>("DsNome")
                         .IsRequired()

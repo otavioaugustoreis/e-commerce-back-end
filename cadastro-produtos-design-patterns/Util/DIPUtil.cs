@@ -21,8 +21,7 @@ namespace cadastro_produtos_design_patterns.Util
             builder.AddScoped<IRepository<NotificacaoEntity>, NotificacaoRepository>();
             builder.AddScoped<IRepository<PagamentoEntity>, PagamentoRepository>();
             builder.AddScoped<IRepository<ProdutoEntity>, ProdutoRepository>();
-            builder.AddScoped<IRepository<UsuarioEntity>, UsuarioRepository>();
-
+            builder.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
             builder.AddScoped<IUsuarioService, UsuarioService>();
             builder.AddScoped<IProdutoService, ProdutoService>();
@@ -31,16 +30,12 @@ namespace cadastro_produtos_design_patterns.Util
             builder.AddScoped<IPedidoService, PedidoService>();
             builder.AddScoped<INotificacaoService, NotificacaoServiceComposite>();
 
-
-
             builder.AddScoped<IPagamentoStrategy, CartaoStrategy>();
             builder.AddScoped<IPagamentoStrategy, PixStrategy>();
 
             builder.AddScoped<IPagamentoFactory, PagamentoFactory>();
 
             builder.AddScoped<IUnitOfWork, UnitOfWork>();
-
-
 
             return builder;
         }

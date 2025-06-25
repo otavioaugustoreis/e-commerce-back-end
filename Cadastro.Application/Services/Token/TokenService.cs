@@ -13,7 +13,7 @@ namespace Cadastro.Application.Services.Token
 {
     public class TokenService : ITokenService
     {
-        public string Generate(UsuarioEntity usuarioEntity)
+        public string Generate(UsuarioEntityToken usuarioEntity)
         {
             var handler = new JwtSecurityTokenHandler();
 
@@ -41,7 +41,7 @@ namespace Cadastro.Application.Services.Token
             return stringToken;
         }
     
-        private static ClaimsIdentity GenerateClaims(UsuarioEntity usuario)
+        private static ClaimsIdentity GenerateClaims(UsuarioEntityToken usuario)
         {
             var claims = new ClaimsIdentity();
             claims.AddClaim(new Claim(ClaimTypes.Name, usuario.DsNome));

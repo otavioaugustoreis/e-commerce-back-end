@@ -17,7 +17,7 @@ namespace Cadastro.Data.Repositories
 
         public async Task<UsuarioEntity> CreateAsync(UsuarioEntity entity)
         {
-             appDbContext._Usuario.Add(entity);
+             await appDbContext._Usuario.AddAsync(entity);
              return entity;
         }
 
@@ -28,7 +28,7 @@ namespace Cadastro.Data.Repositories
 
         public async Task<UsuarioEntity> GetUsuarioByEmail(string email)
         {
-            return await appDbContext._Usuario.FirstOrDefaultAsync(p => p.Email.Trim().ToLower().Equals(email));
+            return await appDbContext._Usuario.FirstOrDefaultAsync(p => p.DsEmail.Trim().ToLower().Equals(email));
         }
 
         public async Task<UsuarioEntity> GetByIdAsync(int? id)

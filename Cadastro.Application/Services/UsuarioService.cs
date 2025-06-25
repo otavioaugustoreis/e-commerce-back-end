@@ -24,7 +24,8 @@ namespace Cadastro.Application.Services
         {
             if (usuarioEntity is null) return Result<UsuarioEntity>.Failure("Usuário é nulo");
 
-            unitOfWork.UsuarioRepository.CreateAsync(usuarioEntity);
+            await unitOfWork.UsuarioRepository.CreateAsync(usuarioEntity);
+            unitOfWork.Commit();
 
             return Result<UsuarioEntity>.Success(usuarioEntity, "Usuario cadastrado com sucesso.");
        }

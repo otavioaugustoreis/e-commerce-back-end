@@ -6,11 +6,26 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Cadastro.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class AjusteMigration : Migration
+    public partial class NewDataBase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "TB_LOGIN",
+                columns: table => new
+                {
+                    PkId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ds_email = table.Column<string>(type: "varchar(50)", nullable: false),
+                    Senha = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DhInclusao = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TB_LOGIN", x => x.PkId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "TB_PAGAMENTO",
                 columns: table => new
@@ -54,6 +69,7 @@ namespace Cadastro.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DsNome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NrIdade = table.Column<int>(type: "int", nullable: false),
+                    ds_email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DhInclusao = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -169,6 +185,9 @@ namespace Cadastro.Data.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "TB_LOGIN");
+
             migrationBuilder.DropTable(
                 name: "TB_NOTIFICACAO");
 

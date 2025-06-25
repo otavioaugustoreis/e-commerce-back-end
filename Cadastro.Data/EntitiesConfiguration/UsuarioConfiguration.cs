@@ -20,6 +20,8 @@ namespace Cadastro.Data.EntitiesConfiguration
             builder.HasMany(p => p.PedidoEntity)
                 .WithOne(p => p.UsuarioEntity)
                 .HasForeignKey(p => p.FkUsuario);
+
+            builder.Property(p => p.DsEmail).HasColumnName("ds_email");
         }
     }
 }

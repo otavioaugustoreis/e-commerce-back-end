@@ -9,6 +9,6 @@ namespace Cadastro.Application.Services.Abstractions
 {
     public interface ITokenService 
     {
-        public string Generate(UsuarioEntity usuarioEntity);
+        public string Generate(UsuarioEntityToken usuarioEntity);
     }
 }

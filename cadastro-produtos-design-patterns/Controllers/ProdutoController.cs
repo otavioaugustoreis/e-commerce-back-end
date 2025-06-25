@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace cadastro_produtos_design_patterns.Controllers
 {
     [ApiController]
-    [Route("/{Controller}")]
+    [Route("/[Controller]")]
     public class ProdutoController
         (IProdutoService _produtoService): ControllerBase
     {

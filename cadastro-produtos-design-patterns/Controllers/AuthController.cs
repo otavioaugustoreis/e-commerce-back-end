@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace cadastro_produtos_design_patterns.Controllers
 {
     [ApiController]
-    [Route("{Controller}")]
+    [Route("/[Controller]")]
     public class AuthController
         (ITokenService _tokenSerivce,
          IUsuarioService _usuarioService) : ControllerBase
@@ -19,15 +19,17 @@ namespace cadastro_produtos_design_patterns.Controllers
         {
             var usuario = await usuarioService.GetUsuarioEmailSenha(loginModelRequest.Email); 
 
-            var token = tokenService.Generate(usuario.Value);
+            //var token = tokenService.Generate(usuario.Value);
 
 
             return Ok();
         }
 
-        public async Task<ActionResult> Registrar(LoginModelRequest loginModelRequest)
-        {
-            return Ok();
-        }
+
+        //[HttpPost]
+        //public async Task<ActionResult> Registrar(LoginModelRequest loginModelRequest)
+        //{
+        //    return Ok();
+        //}
     }
 }
