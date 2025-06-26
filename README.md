@@ -1,4 +1,4 @@
-# 🚀 PedidosApi - Sistema de Gerenciamento de Pedidos com Design Patterns
+# 🚀 PedidosApi - Sistema de E-commerce
 
 **Desafio Técnico ASP.NET Core Web API**  
 Projeto focado em **domínio rico** e **padrões de design** para evolução de raciocínio lógico.
