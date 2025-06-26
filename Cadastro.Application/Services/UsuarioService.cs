@@ -34,6 +34,9 @@ namespace Cadastro.Application.Services
         {
             var usuarios = await unitOfWork.UsuarioRepository.GetAsync();
 
+            if(usuarios is null || !usuarios.Any()) 
+                        return Result<IEnumerable<UsuarioEntity>>.Failure("Não existem usuários");
+
             return Result<IEnumerable<UsuarioEntity>>.Success(usuarios);
         }
 

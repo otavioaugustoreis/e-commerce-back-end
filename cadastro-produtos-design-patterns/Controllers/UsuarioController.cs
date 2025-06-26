@@ -18,7 +18,7 @@ namespace cadastro_produtos_design_patterns.Controllers
         private readonly IUsuarioService usuarioService = _usuarioService;
         private readonly IMapper mapper = _mapper; 
 
-        [HttpPost("inserir")]
+        [HttpPost()]
         public async Task<ActionResult<UsuarioEntity>> CadastrarUsuario([FromBody]UsuarioModelRequest usuarioEntity)
         {
             
@@ -33,11 +33,11 @@ namespace cadastro_produtos_design_patterns.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<UsuarioEntity>>> GetUsuarios()
+        public async Task<ActionResult<List<UsuarioModelResponse>>> GetUsuarios()
         {
             var usuarios = await usuarioService.Get();
 
-            var usuariosModelResponse = mapper.Map<List<UsuarioModelResponse>>(usuarios);
+            var usuariosModelResponse = mapper.Map<List<UsuarioModelResponse>>(usuarios.Value);
 
             return Ok(usuariosModelResponse);
         }
