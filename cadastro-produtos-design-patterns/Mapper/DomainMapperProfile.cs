@@ -12,6 +12,9 @@ namespace cadastro_produtos_design_patterns.Mapper
             CreateMap<UsuarioEntity, UsuarioModelRequest>().ReverseMap();
             CreateMap<UsuarioModelRequest, UsuarioModelResponse>().ReverseMap();
             CreateMap<UsuarioEntity, UsuarioModelResponse>().ReverseMap();
+            
+            CreateMap<LoginEntity, LoginModelRequest>().ReverseMap();
+            CreateMap<LoginEntity, LoginModelResponse>().ReverseMap();
         }
     }
 }

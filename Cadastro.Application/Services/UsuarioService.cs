@@ -42,17 +42,19 @@ namespace Cadastro.Application.Services
 
         public async Task<Result<UsuarioEntity>> GetId(int id)
         {
-            var usuarios = await unitOfWork.UsuarioRepository.GetByIdAsync(id);
+            var usuario = await unitOfWork.UsuarioRepository.GetByIdAsync(id);
 
-            return Result<UsuarioEntity>.Success(usuarios);
-              
+            if (usuario is null )
+                return Result<UsuarioEntity>.Failure("Não existem usuários");
+
+            return Result<UsuarioEntity>.Success(usuario);
         }
 
-        public async Task<Result<UsuarioEntity>> GetUsuarioEmailSenha(string email)
+        public async Task<Result<UsuarioEntity>> GetUsuarioEmail(string email)
         {
             var usuario = await unitOfWork.UsuarioRepository.GetUsuarioByEmail(email);
 
-            if (usuario is null) return Result<UsuarioEntity>.Failure("Usuário não encontrado");
+            if (usuario is null) return Result<UsuarioEntity>.Failure("Usuário não cadastrado, faça o cadastro");
 
             return Result<UsuarioEntity>.Success(usuario);
         }

@@ -1,6 +1,8 @@
-﻿using Cadastro.Application.Services.Abstractions;
+﻿using Cadastro.Application.Return;
+using Cadastro.Application.Services.Abstractions;
 using Cadastro.Domain.Entities;
 using cadastro_produtos_design_patterns.Model.Request;
+using cadastro_produtos_design_patterns.Model.Response;
 using Microsoft.AspNetCore.Mvc;
 
 namespace cadastro_produtos_design_patterns.Controllers
@@ -8,28 +10,41 @@ namespace cadastro_produtos_design_patterns.Controllers
     [ApiController]
     [Route("/[Controller]")]
     public class AuthController
-        (ITokenService _tokenSerivce,
+        (ILoginService _loginService,
          IUsuarioService _usuarioService) : ControllerBase
     {
-        private readonly ITokenService tokenService = _tokenSerivce;
+        private readonly ILoginService loginService = _loginService;
         private readonly IUsuarioService usuarioService = _usuarioService;
 
-        [HttpGet("/login")]
-        public async Task<ActionResult> Login(LoginModelRequest loginModelRequest)
+        [HttpGet()]
+        public async Task<ActionResult<LoginModelResponse>> Login(LoginModelRequest loginModelRequest)
         {
-            var usuario = await usuarioService.GetUsuarioEmailSenha(loginModelRequest.Email); 
+            var usuario = await usuarioService.GetUsuarioEmail(loginModelRequest.Email);
 
-            //var token = tokenService.Generate(usuario.Value);
+            if (usuario.Value is null)
+            {
+                return BadRequest(usuario.ErrorMessage);
+            }
 
+            var token = loginService.Logar(usuario.Value);
 
-            return Ok();
+            return Ok(new LoginModelResponse
+                                           { 
+                                            Token = token.Value
+                                           });
         }
 
 
-        //[HttpPost]
-        //public async Task<ActionResult> Registrar(LoginModelRequest loginModelRequest)
-        //{
-        //    return Ok();
-        //}
+        [HttpPost("/registrarlogin")]
+        public async Task<ActionResult> Registrar(int usuario, string senha)
+        {
+            var usuarioEntity = await usuarioService.GetId(usuario);
+
+            if (usuarioEntity is null) return BadRequest(usuarioEntity.ErrorMessage);
+
+            loginService.Registrar(usuarioEntity.Value.DsEmail, senha);
+
+            return Ok("Login registrado com sucesso");
+        }
     }
 }

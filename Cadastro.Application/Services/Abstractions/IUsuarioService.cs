@@ -9,5 +9,5 @@ namespace Cadastro.Application.Services.Abstractions
 
 }    public interface IUsuarioService : IService<UsuarioEntity>
     {
-        public Task<Result<UsuarioEntity>> GetUsuarioEmailSenha(string email);
+        public Task<Result<UsuarioEntity>> GetUsuarioEmail(string email);
     }

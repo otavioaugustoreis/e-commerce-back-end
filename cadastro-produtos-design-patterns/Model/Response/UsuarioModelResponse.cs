@@ -5,6 +5,6 @@
         public int PkId { get; set; }
         public string  DsNome { get; set; }
         public int NrIdade { get; set; }
-
+        public string  DsEmail { get; set; }
     }
 }
