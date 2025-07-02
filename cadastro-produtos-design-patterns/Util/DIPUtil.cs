@@ -3,6 +3,7 @@ using Cadastro.Application.Services.Abstractions;
 using Cadastro.Application.Services.Composite;
 using Cadastro.Application.Services.Factory;
 using Cadastro.Application.Services.Strategy;
+using Cadastro.Application.Services.Token;
 using Cadastro.Data.Repositories;
 using Cadastro.Data.Repositories.Pattern;
 using Cadastro.Data.UnitOfWork;
@@ -22,6 +23,7 @@ namespace cadastro_produtos_design_patterns.Util
             builder.AddScoped<IRepository<PagamentoEntity>, PagamentoRepository>();
             builder.AddScoped<IRepository<ProdutoEntity>, ProdutoRepository>();
             builder.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            builder.AddScoped<IRepository<LoginEntity>, LoginRepository>();
 
             builder.AddScoped<IUsuarioService, UsuarioService>();
             builder.AddScoped<IProdutoService, ProdutoService>();
@@ -29,6 +31,8 @@ namespace cadastro_produtos_design_patterns.Util
             builder.AddScoped<IPagamentoService, PagamentoService>();
             builder.AddScoped<IPedidoService, PedidoService>();
             builder.AddScoped<INotificacaoService, NotificacaoServiceComposite>();
+            builder.AddScoped<ILoginService, LoginService>();
+            builder.AddScoped<ITokenService, TokenService>();
 
             builder.AddScoped<IPagamentoStrategy, CartaoStrategy>();
             builder.AddScoped<IPagamentoStrategy, PixStrategy>();
