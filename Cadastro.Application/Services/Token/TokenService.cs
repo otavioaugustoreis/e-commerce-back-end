@@ -30,7 +30,7 @@ namespace Cadastro.Application.Services.Token
             {
                 Subject = GenerateClaims(usuarioEntity),
                 SigningCredentials = credentials,
-                Expires = DateTime.Now.AddHours(2)
+                Expires = DateTime.UtcNow.AddHours(2)
             };
 
 

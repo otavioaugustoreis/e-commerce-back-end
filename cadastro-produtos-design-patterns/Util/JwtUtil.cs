@@ -30,7 +30,7 @@ namespace cadastro_produtos_design_patterns.Util
                 };
             });
 
-            service.AddAuthentication();
+            service.AddAuthorization();
 
             return service;
         }

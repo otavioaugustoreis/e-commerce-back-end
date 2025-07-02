@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Cadastro.Data.Repositories
 {
+
     public class PedidoRepository
         (AppDbContext _appDbContext) : IRepository<PedidoEntity>
     {

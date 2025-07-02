@@ -24,7 +24,7 @@ namespace Cadastro.Application.Services
 
             //Validação se a senha está correta e se existe
 
-            string senha = null;
+            string senha = "null";
 
             if(string.IsNullOrEmpty(senha))
             {
@@ -35,12 +35,12 @@ namespace Cadastro.Application.Services
             var usuarioToken = new UsuarioEntityToken()
             {
                 DsNome = usuarioEntity.DsNome,
-                // Roles = ??
+                Roles = new string[] { "User" }
             };
 
             string token = tokenService.Generate(usuarioToken);
 
-            return Result<string>.Success("Token gerado com sucesso");
+            return Result<string>.Success(token,"Token gerado com sucesso");
         }
 
         public Result<LoginEntity> Registrar(string email, string senha)
