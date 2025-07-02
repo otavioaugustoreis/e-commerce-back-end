@@ -16,19 +16,19 @@ namespace cadastro_produtos_design_patterns.Controllers
         private readonly ILoginService loginService = _loginService;
         private readonly IUsuarioService usuarioService = _usuarioService;
 
-        [HttpGet()]
-        public async Task<ActionResult<LoginModelResponse>> Login(LoginModelRequest loginModelRequest)
+        [HttpPost()]
+        public async Task<ActionResult<LoginModelResponse>> Login([FromBody]LoginModelRequest loginModelRequest)
         {
             var usuario = await usuarioService.GetUsuarioEmail(loginModelRequest.Email);
 
-            if (usuario.Value is null)
+            if (!usuario.IsSuccess)
             {
                 return BadRequest(usuario.ErrorMessage);
             }
             //Tentar fazer uma fila, de login
             var token = loginService.Logar(usuario.Value);
 
-            if(token is null)
+            if(!token.IsSuccess)
             {
                 loginService.Registrar(loginModelRequest.Email, loginModelRequest.Senha);
             }

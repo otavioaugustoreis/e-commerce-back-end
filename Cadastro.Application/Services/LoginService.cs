@@ -18,12 +18,13 @@ namespace Cadastro.Application.Services
 
         private readonly IUnitOfWork unitOfWork = _unitOfWork;
         private readonly ITokenService tokenService = _tokenService;
+       
         public Result<string> Logar(UsuarioEntity usuarioEntity)
         {
 
             //Validação se a senha está correta e se existe
 
-            string senha = "";
+            string senha = null;
 
             if(string.IsNullOrEmpty(senha))
             {
@@ -50,9 +51,16 @@ namespace Cadastro.Application.Services
             if (string.IsNullOrEmpty(senha))
                 return Result<LoginEntity>.Failure("Senha não pode ser vazia");
 
-            unitOfWork.
+            LoginEntity loginEntity = new LoginEntity()
+            {
+                Email = email,
+                Senha = senha
+            };
 
-            
+            unitOfWork.LoginRepository.CreateAsync(loginEntity);
+            unitOfWork.Commit();
+
+            return Result<LoginEntity>.Success(loginEntity, "Login cadastrado com sucesso");
         }
     }
 }

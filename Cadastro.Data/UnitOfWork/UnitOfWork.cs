@@ -44,7 +44,7 @@ namespace Cadastro.Data.UnitOfWork
 
         public IRepository<ProdutoEntity> ProdutoRepository { get => produtoRepository ?? new ProdutoRepository(appDbContext); }
 
-        public IRepository<LoginEntity> LoginRepository { get => loginRepository ?? new LoginRepository }
+        public IRepository<LoginEntity> LoginRepository { get => loginRepository ?? new LoginRepository(appDbContext); }
 
         public void Commit()
         {
