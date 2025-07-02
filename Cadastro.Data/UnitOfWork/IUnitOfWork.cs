@@ -17,6 +17,7 @@ namespace Cadastro.Data.UnitOfWork
         public IRepository<PedidoEntity> PedidoRepository { get; }
         public IRepository<PedidoItemEntity> PedidoItemRepository { get; }
         public IRepository<ProdutoEntity> ProdutoRepository { get; }
+        public IRepository<LoginEntity> LoginRepository { get; }
         public void Commit();
     }
 }

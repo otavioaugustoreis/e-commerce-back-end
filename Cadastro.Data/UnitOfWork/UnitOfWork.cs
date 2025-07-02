@@ -18,7 +18,8 @@ namespace Cadastro.Data.UnitOfWork
             IRepository<PedidoEntity> _pedidoRepository,
             IRepository<PedidoItemEntity> _pedidoItemRepository,
             IRepository<ProdutoEntity> _produtoRepository,
-            AppDbContext _appDbContext) : IUnitOfWork
+            AppDbContext _appDbContext,
+            IRepository<LoginEntity> _loginRepository) : IUnitOfWork
     {
         private readonly IRepository<PagamentoEntity> pagamentoRepository = _pagamentoRepository;
         private readonly IUsuarioRepository usuarioRepository = _usuarioRepository;
@@ -26,6 +27,8 @@ namespace Cadastro.Data.UnitOfWork
         private readonly IRepository<PedidoEntity> pedidoRepository = _pedidoRepository;
         private readonly IRepository<PedidoItemEntity> pedidoItemRepository = _pedidoItemRepository;
         private readonly IRepository<ProdutoEntity> produtoRepository = _produtoRepository;
+        private readonly IRepository<LoginEntity> loginRepository = _loginRepository;
+
 
         private readonly AppDbContext appDbContext = _appDbContext;
 
@@ -40,6 +43,8 @@ namespace Cadastro.Data.UnitOfWork
         public IRepository<PedidoItemEntity> PedidoItemRepository { get => pedidoItemRepository ?? new PedidoItemRepository(appDbContext); }
 
         public IRepository<ProdutoEntity> ProdutoRepository { get => produtoRepository ?? new ProdutoRepository(appDbContext); }
+
+        public IRepository<LoginEntity> LoginRepository { get => loginRepository ?? new LoginRepository }
 
         public void Commit()
         {

@@ -18,7 +18,7 @@ namespace cadastro_produtos_design_patterns.Controllers
         private readonly IUsuarioService usuarioService = _usuarioService;
         private readonly IMapper mapper = _mapper; 
 
-        [HttpPost()]
+        [HttpPost]
         public async Task<ActionResult<UsuarioEntity>> CadastrarUsuario([FromBody]UsuarioModelRequest usuarioEntity)
         {
             

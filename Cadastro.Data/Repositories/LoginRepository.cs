@@ -8,36 +8,35 @@ using System.Threading.Tasks;
 
 namespace Cadastro.Data.Repositories
 {
-    public class PedidoRepository
-        (AppDbContext _appDbContext) : IRepository<PedidoEntity>
+    public class LoginRepository(AppDbContext _appDbContext) 
+        : IRepository<LoginEntity>
     {
-
         private readonly AppDbContext appDbContext = _appDbContext;
 
 
-        public async Task<PedidoEntity> CreateAsync(PedidoEntity entity)
+        public async Task<LoginEntity> CreateAsync(LoginEntity entity)
         {
             appDbContext.Add(entity);
             return entity;
         }
 
-        public async Task<IEnumerable<PedidoEntity>> GetAsync()
+        public async Task<IEnumerable<LoginEntity>> GetAsync()
         {
-            return appDbContext._Pedido.ToList();
+            return appDbContext._Login.ToList();
         }
 
-        public async Task<PedidoEntity> GetByIdAsync(int? id)
+        public async Task<LoginEntity> GetByIdAsync(int? id)
         {
-            return appDbContext._Pedido.FirstOrDefault(p => p.PkId == id);
+            return appDbContext._Login.FirstOrDefault(p => p.PkId == id);
         }
 
-        public async Task<PedidoEntity> RemoveAsync(PedidoEntity entity)
+        public async Task<LoginEntity> RemoveAsync(LoginEntity entity)
         {
             appDbContext.Remove(entity);
             return entity;
         }
 
-        public async Task<PedidoEntity> UpdateAsync(PedidoEntity entity)
+        public async Task<LoginEntity> UpdateAsync(LoginEntity entity)
         {
             appDbContext.Update(entity);
             return entity;

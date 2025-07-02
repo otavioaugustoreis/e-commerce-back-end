@@ -5,6 +5,7 @@ using Cadastro.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,8 +19,17 @@ namespace Cadastro.Application.Services
         private readonly IUnitOfWork unitOfWork = _unitOfWork;
         private readonly ITokenService tokenService = _tokenService;
         public Result<string> Logar(UsuarioEntity usuarioEntity)
-        { 
-           //Validação se a senha está correta
+        {
+
+            //Validação se a senha está correta e se existe
+
+            string senha = "";
+
+            if(string.IsNullOrEmpty(senha))
+            {
+                return Result<string>.Failure("Usuário sem registro de login");
+            }
+
             
             var usuarioToken = new UsuarioEntityToken()
             {
@@ -34,7 +44,15 @@ namespace Cadastro.Application.Services
 
         public Result<LoginEntity> Registrar(string email, string senha)
         {
-        
+            if (string.IsNullOrEmpty(email))
+                return Result<LoginEntity>.Failure("E-mail não pode ser vazio");
+
+            if (string.IsNullOrEmpty(senha))
+                return Result<LoginEntity>.Failure("Senha não pode ser vazia");
+
+            unitOfWork.
+
+            
         }
     }
 }

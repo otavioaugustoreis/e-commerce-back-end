@@ -25,26 +25,21 @@ namespace cadastro_produtos_design_patterns.Controllers
             {
                 return BadRequest(usuario.ErrorMessage);
             }
-
+            //Tentar fazer uma fila, de login
             var token = loginService.Logar(usuario.Value);
+
+            if(token is null)
+            {
+                loginService.Registrar(loginModelRequest.Email, loginModelRequest.Senha);
+            }
+
+            token = loginService.Logar(usuario.Value);
+
 
             return Ok(new LoginModelResponse
                                            { 
                                             Token = token.Value
                                            });
-        }
-
-
-        [HttpPost("/registrarlogin")]
-        public async Task<ActionResult> Registrar(int usuario, string senha)
-        {
-            var usuarioEntity = await usuarioService.GetId(usuario);
-
-            if (usuarioEntity is null) return BadRequest(usuarioEntity.ErrorMessage);
-
-            loginService.Registrar(usuarioEntity.Value.DsEmail, senha);
-
-            return Ok("Login registrado com sucesso");
         }
     }
 }
