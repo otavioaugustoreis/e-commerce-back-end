@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Cadastro.Data.Repositories
 {
-    public class LoginRepository(AppDbContext _appDbContext) 
-        : IRepository<LoginEntity>
+    public class LoginRepository(AppDbContext _appDbContext)
+        :  ILoginRepository
     {
         private readonly AppDbContext appDbContext = _appDbContext;
 

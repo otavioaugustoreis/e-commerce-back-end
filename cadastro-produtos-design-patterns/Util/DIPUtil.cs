@@ -23,7 +23,7 @@ namespace cadastro_produtos_design_patterns.Util
             builder.AddScoped<IRepository<PagamentoEntity>, PagamentoRepository>();
             builder.AddScoped<IRepository<ProdutoEntity>, ProdutoRepository>();
             builder.AddScoped<IUsuarioRepository, UsuarioRepository>();
-            builder.AddScoped<IRepository<LoginEntity>, LoginRepository>();
+            builder.AddScoped<ILoginRepository, LoginRepository>();
 
             builder.AddScoped<IUsuarioService, UsuarioService>();
             builder.AddScoped<IProdutoService, ProdutoService>();
