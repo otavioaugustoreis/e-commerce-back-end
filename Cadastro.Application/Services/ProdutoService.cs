@@ -19,9 +19,10 @@ namespace Cadastro.Application.Services
 
         public async Task<Result<ProdutoEntity>> Criar(ProdutoEntity entity)
         {
-            var produtoCadastrado = unitOfWork.ProdutoRepository.CreateAsync(entity);
+            var produtoCadastrado = await unitOfWork.ProdutoRepository.CreateAsync(entity);
+            unitOfWork.Commit();
 
-            return Result<ProdutoEntity>.Success(produtoCadastrado.Result, "Produto cadastrado com sucesso");
+            return Result<ProdutoEntity>.Success(produtoCadastrado, "Produto cadastrado com sucesso");
         }
 
         public async  Task<Result<IEnumerable<ProdutoEntity>>> Get()

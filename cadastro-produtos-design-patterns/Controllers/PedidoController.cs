@@ -10,9 +10,18 @@ namespace cadastro_produtos_design_patterns.Controllers
     [ApiController]
     [Route("/[Controller]")]
     public class PedidoController
-        (IPedidoService _pedidoService) : ControllerBase
+        (IPedidoService _pedidoService,
+        IProdutoService _produtoService) : ControllerBase
     {
         private readonly  IPedidoService pedidoService = _pedidoService;
+        private readonly IProdutoService produtoService = _produtoService;
+
+        [HttpPost()]
+        public ActionResult CriarPedido(int pedido)
+        {
+            return Ok();  
+        }
+        
 
     }
 }
