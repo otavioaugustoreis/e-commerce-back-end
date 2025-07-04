@@ -30,6 +30,11 @@ namespace Cadastro.Application.Services
             return Result<UsuarioEntity>.Success(usuarioEntity, "Usuario cadastrado com sucesso.");
        }
 
+        public Task<Result<UsuarioEntity>> Deletar(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Result<IEnumerable<UsuarioEntity>>> Get()
         {
             var usuarios = await unitOfWork.UsuarioRepository.GetAsync();

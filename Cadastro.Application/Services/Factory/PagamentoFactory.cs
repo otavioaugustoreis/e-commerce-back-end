@@ -26,7 +26,6 @@ namespace Cadastro.Application.Services.Factory
                 TipoPagamento.CARTAO => services.GetRequiredService<CartaoStrategy>(),
                 TipoPagamento.PIX => services.GetRequiredService<PixStrategy>(),
                 _ => throw new NotImplementedException("Tipo não implementado.")
-
             };
         }
     }

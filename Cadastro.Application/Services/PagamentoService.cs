@@ -40,6 +40,11 @@ namespace Cadastro.Application.Services
             return pagando;
         }
 
+        public Task<Result<PagamentoEntity>> Deletar(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<Result<IEnumerable<PagamentoEntity>>> Get()
         {
             throw new NotImplementedException();

@@ -13,5 +13,6 @@ namespace Cadastro.Application.Services.Abstractions
         Task<Result<T>> Criar(T entity);
         Task<Result<IEnumerable<T>>> Get();
         Task<Result<T>> GetId(int id);
+        Task<Result<T>> Deletar(int id);
     }
 }

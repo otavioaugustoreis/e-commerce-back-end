@@ -10,7 +10,6 @@ namespace cadastro_produtos_design_patterns.Mapper
         public DomainMapperProfile()
         {
             CreateMap<UsuarioEntity, UsuarioModelRequest>().ReverseMap();
-            CreateMap<UsuarioModelRequest, UsuarioModelResponse>().ReverseMap();
             CreateMap<UsuarioEntity, UsuarioModelResponse>().ReverseMap();
             
             CreateMap<LoginEntity, LoginModelRequest>().ReverseMap();

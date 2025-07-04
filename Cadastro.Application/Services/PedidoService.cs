@@ -25,6 +25,11 @@ namespace Cadastro.Application.Services
             throw new NotImplementedException();
         }
 
+        public Task<Result<PedidoEntity>> Deletar(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<Result<IEnumerable<PedidoEntity>>> Get()
         {
             throw new NotImplementedException();
@@ -34,5 +39,7 @@ namespace Cadastro.Application.Services
         {
             throw new NotImplementedException();
         }
+
+
     }
 }
