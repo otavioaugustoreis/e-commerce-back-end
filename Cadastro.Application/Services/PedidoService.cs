@@ -17,7 +17,8 @@ namespace Cadastro.Application.Services
 
         public Task<Result<PedidoEntity>> Criar(PedidoEntity entity)
         {
-            throw new NotImplementedException();
+          entity.
+
         }
 
         public Task<Result<PedidoEntity>> CriarComPagamento(PagamentoEntity pagamentoEntity)

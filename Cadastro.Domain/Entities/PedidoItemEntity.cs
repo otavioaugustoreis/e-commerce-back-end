@@ -16,7 +16,6 @@ namespace Cadastro.Domain.Entities
         public PedidoEntity PedidoEntity { get; set; }
         public int FkPedido { get; set; }
         public int FkProduto { get; set; }
-        public  int  NrQuantidade { get; set; }
-
+        public int  NrQuantidade { get; set; }
     }
 }

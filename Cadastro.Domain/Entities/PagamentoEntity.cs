@@ -25,6 +25,5 @@ namespace Cadastro.Domain.Entities
         {
         }
 
-
     }
 }

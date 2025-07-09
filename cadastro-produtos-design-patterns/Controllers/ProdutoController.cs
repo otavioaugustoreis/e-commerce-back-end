@@ -41,9 +41,8 @@ namespace cadastro_produtos_design_patterns.Controllers
 
             var produtoMapeado = mapper.Map<ProdutoModelRequest>(produtoEntity.Value);
 
-            return Ok(id);  
+            return Ok(id);
         }
-
 
         [HttpGet]
         public async Task<ActionResult<List<ProdutoModelRequest>>> GetAll()
@@ -57,9 +56,15 @@ namespace cadastro_produtos_design_patterns.Controllers
 
             var produtosMapped = mapper.Map<List<ProdutoModelRequest>>(produtosEntitys.Value);
 
-            Response.Headers.Add("X-Message", produtosEntitys?.SuccessMessage);
+            Response.Headers.Add("X-Message", "Success");
 
             return Ok(produtosMapped);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<ProdutoModelRequest>> Alterar()
+        {
+            return Ok();
         }
 
     }
