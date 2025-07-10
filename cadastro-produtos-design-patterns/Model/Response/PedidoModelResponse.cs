@@ -11,5 +11,6 @@ namespace cadastro_produtos_design_patterns.Model.Response
         public PedidoStatus Status { get; set; }
         public UsuarioModelResponse UsuarioEntity { get; set; }
         public List<ProdutoModelRequest> Produtos { get; set; }
+        public PagamentoModelResponse Pagamento { get; set; }
     }
 }

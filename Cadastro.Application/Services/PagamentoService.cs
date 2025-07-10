@@ -28,7 +28,6 @@ namespace Cadastro.Application.Services
 
         public  async  Task<Result<PagamentoEntity>> Criar(PagamentoEntity pagamento)
         {
-
             IPagamentoStrategy result = pagamentoFactory.RetornarPagamento(pagamento.TipoPagamento);
            
             var pagando = result.Pagar(pagamento);

@@ -15,10 +15,9 @@ namespace Cadastro.Application.Services
     {
         private readonly IUnitOfWork unitOfWork = _unitOfWork;
 
-        public Task<Result<PedidoEntity>> Criar(PedidoEntity entity)
+        public async Task<Result<PedidoEntity>> Criar(PedidoEntity entity)
         {
-          entity.
-
+            return null;
         }
 
         public Task<Result<PedidoEntity>> CriarComPagamento(PagamentoEntity pagamentoEntity)
@@ -41,6 +40,9 @@ namespace Cadastro.Application.Services
             throw new NotImplementedException();
         }
 
-
+        private Task<Result<ProdutoEntity>> CalcularValorPedido(PagamentoEntity pagamentoEntity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

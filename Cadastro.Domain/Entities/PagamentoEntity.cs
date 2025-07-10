@@ -12,13 +12,13 @@ namespace Cadastro.Domain.Entities
     {
         public PedidoEntity PedidoEntity { get; set; }
         public decimal Valor { get; set; }
-
-        public PagamentoStatus PagamentoStatus { get; set; }
-
+        public PagamentoStatus PagamentoStatus { get; set; } = PagamentoStatus.PENDENTE;
         public  TipoPagamento TipoPagamento { get; set; }
         public Guid NrQrCode { get; set; } = Guid.NewGuid();
         public string NrCartaoMascarado { get; set; } 
         public int? Parcelas { get; set; } 
+
+
         public PagamentoEntity() { }
 
         public  PagamentoEntity(TipoPagamento TipoPagamento) 

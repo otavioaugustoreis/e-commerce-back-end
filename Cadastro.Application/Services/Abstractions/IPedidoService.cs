@@ -11,6 +11,5 @@ namespace Cadastro.Application.Services.Abstractions
     public interface IPedidoService : IService<PedidoEntity>
     {
         Task<Result<PedidoEntity>> CriarComPagamento(PagamentoEntity pagamentoEntity);
-        Task<Result<ProdutoEntity>> CalcularValorPedido(PagamentoEntity pagamentoEntity);
     }
 }

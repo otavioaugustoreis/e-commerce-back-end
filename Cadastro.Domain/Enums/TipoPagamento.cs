@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cadastro.Domain.Enums
 {
-    public enum TipoPagamento 
+    public enum TipoPagamento
     {
         PIX,
         CARTAO,
