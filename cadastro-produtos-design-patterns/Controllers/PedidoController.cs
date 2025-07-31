@@ -28,7 +28,7 @@ namespace cadastro_produtos_design_patterns.Controllers
         {
             var usuarioId = pedidoModelRequest.FkUsuario;
             var usuario = await usuarioService.GetId(usuarioId);
-
+            
             if (!usuario.IsSuccess)
             {
                 return BadRequest(usuario.ErrorMessage);

@@ -1,5 +1,6 @@
 ﻿using Cadastro.Application.Services;
 using Cadastro.Application.Services.Abstractions;
+using Cadastro.Application.Services.Cache;
 using Cadastro.Application.Services.Composite;
 using Cadastro.Application.Services.Factory;
 using Cadastro.Application.Services.Strategy;
@@ -40,6 +41,8 @@ namespace cadastro_produtos_design_patterns.Util
             builder.AddScoped<IPagamentoFactory, PagamentoFactory>();
 
             builder.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.AddScoped<ICacheService, CachingService>();
+
 
             return builder;
         }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Cadastro.Application.Services.Abstractions;
+using Cadastro.Application.Services.Cache;
 using Cadastro.Domain.Entities;
 using cadastro_produtos_design_patterns.Model.Request;
 using Microsoft.AspNetCore.Mvc;

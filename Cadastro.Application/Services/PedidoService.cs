@@ -2,6 +2,7 @@
 using Cadastro.Application.Services.Abstractions;
 using Cadastro.Data.UnitOfWork;
 using Cadastro.Domain.Entities;
+using Cadastro.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,19 @@ namespace Cadastro.Application.Services
 
         public async Task<Result<PedidoEntity>> Criar(PedidoEntity entity)
         {
-            return null;
+            var valorPedido = await CalcularValorPedidoAsync(entity.PedidoItemEntity);
+
+            if (!valorPedido.IsSuccess) 
+            { 
+                return Result<PedidoEntity>.Failure(valorPedido.ErrorMessage);
+            }
+
+            entity.Status = PedidoStatus.PENDENTE;
+            entity.NrValor = valorPedido.Value;
+
+            await unitOfWork.PedidoRepository.CreateAsync(entity);
+
+            return Result<PedidoEntity>.Success(entity);
         }
 
         public Task<Result<PedidoEntity>> CriarComPagamento(PagamentoEntity pagamentoEntity)
@@ -40,9 +53,40 @@ namespace Cadastro.Application.Services
             throw new NotImplementedException();
         }
 
-        private Task<Result<ProdutoEntity>> CalcularValorPedido(PagamentoEntity pagamentoEntity)
+        private async void CriarPedidoItemAsync(List<PedidoItemEntity> pedidoItemEntity, int idPedido)
         {
-            throw new NotImplementedException();
+            foreach (var item in pedidoItemEntity) 
+            {
+                await unitOfWork.PedidoItemRepository.CreateAsync(item);
+                unitOfWork.Commit();
+            }
+        }
+
+        private async Task<Result<double>> CalcularValorPedidoAsync(List<PedidoItemEntity> pedidoItemEntity)
+        {
+            double valor = 0;
+
+            foreach (var item in pedidoItemEntity) 
+            {
+                var produto = await unitOfWork.ProdutoRepository.GetByIdAsync(item.FkProduto);
+
+                if (item.NrQuantidade > produto.Quantidade)
+                {
+                    return Result<double>.Failure("A quantidade fornecida não corresponde com a quantidade do produto");
+                }
+                
+                var valorProduto = produto.NrValor;
+                var quantidade = item.NrQuantidade;
+
+                valor += valorProduto * quantidade;
+
+                produto.DiminuirQuantidade(quantidade);
+
+                await unitOfWork.ProdutoRepository.UpdateAsync(produto);
+                unitOfWork.Commit();
+            }
+
+            return Result<double>.Success(valor);
         }
     }
 }

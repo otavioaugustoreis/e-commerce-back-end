@@ -1,21 +1,28 @@
 ﻿using Cadastro.Application.Return;
 using Cadastro.Application.Services.Abstractions;
+using Cadastro.Application.Services.Cache;
 using Cadastro.Data.UnitOfWork;
 using Cadastro.Domain.Entities;
 using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Cadastro.Application.Services
 {
     public class ProdutoService
-        (IUnitOfWork _unitOfWork) : IProdutoService
+        (IUnitOfWork _unitOfWork,
+        ICacheService _cacheService) : IProdutoService
     {
 
         private readonly IUnitOfWork unitOfWork = _unitOfWork;
+        private readonly ICacheService cacheService = _cacheService;
+
 
         public async Task<Result<ProdutoEntity>> Criar(ProdutoEntity entity)
         {
@@ -40,15 +47,26 @@ namespace Cadastro.Application.Services
 
         public async Task<Result<ProdutoEntity>> GetId(int id)
         {
+            ProdutoEntity produto;
 
-            var produto = unitOfWork.ProdutoRepository.GetByIdAsync(id);
+            var produtoCache= await cacheService.GetAsync(id.ToString());
 
-            if(produto is null)
+
+            if (string.IsNullOrEmpty(produtoCache))
             {
-                return Result<ProdutoEntity>.Failure("O produto não foi encontrado");
+                produto = await unitOfWork.ProdutoRepository.GetByIdAsync(id);
+
+                if (produto is null)
+                {
+                    return Result<ProdutoEntity>.Failure("O produto não foi encontrado");
+                }
+                await cacheService.SetAsync(produto.PkId.ToString(), JsonSerializer.Serialize(produto));
+
+                return Result<ProdutoEntity>.Success(produto);
             }
 
-            return Result<ProdutoEntity>.Success(produto.Result);
+            produto = JsonSerializer.Deserialize<ProdutoEntity>(produtoCache)!;
+            return Result<ProdutoEntity>.Success(produto);
         }
 
         public async Task<Result<ProdutoEntity>> Deletar(int id)
