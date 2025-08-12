@@ -18,7 +18,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\cadastro-produtos-design-patterns\cadastro-produtos-design-patterns.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UnitTests\GET\" />
+    <Folder Include="UnitTests\DELETE\" />
+    <Folder Include="UnitTests\POST\" />
+    <Folder Include="UnitTests\PUT\" />
   </ItemGroup>
 
 </Project>

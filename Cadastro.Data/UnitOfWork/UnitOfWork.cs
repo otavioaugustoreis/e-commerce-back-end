@@ -12,15 +12,17 @@ using System.Threading.Tasks;
 namespace Cadastro.Data.UnitOfWork
 {
     public class UnitOfWork(
-            IRepository<PagamentoEntity> _pagamentoRepository,
-            IUsuarioRepository _usuarioRepository,
-            IRepository<NotificacaoEntity> _notificaoRepository,
-            IRepository<PedidoEntity> _pedidoRepository,
-            IRepository<PedidoItemEntity> _pedidoItemRepository,
-            IRepository<ProdutoEntity> _produtoRepository,
-            AppDbContext _appDbContext,
-            ILoginRepository _loginRepository) : IUnitOfWork
+            IRepository<PagamentoEntity> _pagamentoRepository = null,
+            IUsuarioRepository _usuarioRepository =  null,
+            IRepository<NotificacaoEntity> _notificaoRepository =  null,
+            IRepository<PedidoEntity> _pedidoRepository =  null,
+            ILoginRepository _loginRepository = null,
+            IRepository<PedidoItemEntity> _pedidoItemRepository =  null,
+            IRepository<ProdutoEntity> _produtoRepository =  null,
+            AppDbContext _appDbContext = null) : IUnitOfWork
     {
+        
+
         private readonly IRepository<PagamentoEntity> pagamentoRepository = _pagamentoRepository;
         private readonly IUsuarioRepository usuarioRepository = _usuarioRepository;
         private readonly IRepository<NotificacaoEntity> notificaoRepository = _notificaoRepository;
@@ -28,11 +30,10 @@ namespace Cadastro.Data.UnitOfWork
         private readonly IRepository<PedidoItemEntity> pedidoItemRepository = _pedidoItemRepository;
         private readonly IRepository<ProdutoEntity> produtoRepository = _produtoRepository;
         private readonly ILoginRepository loginRepository = _loginRepository;
-
-
         private readonly AppDbContext appDbContext = _appDbContext;
 
-       
+        
+
         public IRepository<PagamentoEntity> PagamentoRepository { get => pagamentoRepository ?? new PagamentoRepository(appDbContext); }
         public IUsuarioRepository UsuarioRepository { get => usuarioRepository ?? new UsuarioRepository(appDbContext); }
 
