@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cadastro.Data", "Cadastro.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cadastro.Domain", "Cadastro.Domain\Cadastro.Domain.csproj", "{39F8F75C-B160-4B5C-8045-5BA701F211B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce.Tests", "Ecommerce.Tests\Ecommerce.Tests.csproj", "{26F6E090-0675-4332-A0DC-841BE067BB92}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{39F8F75C-B160-4B5C-8045-5BA701F211B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39F8F75C-B160-4B5C-8045-5BA701F211B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39F8F75C-B160-4B5C-8045-5BA701F211B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26F6E090-0675-4332-A0DC-841BE067BB92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26F6E090-0675-4332-A0DC-841BE067BB92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26F6E090-0675-4332-A0DC-841BE067BB92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26F6E090-0675-4332-A0DC-841BE067BB92}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
