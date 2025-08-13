@@ -5,6 +5,7 @@ using Cadastro.Domain.Entities;
 using cadastro_produtos_design_patterns.Model.Request;
 using cadastro_produtos_design_patterns.Model.Response;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace cadastro_produtos_design_patterns.Controllers
 {
@@ -17,39 +18,55 @@ namespace cadastro_produtos_design_patterns.Controllers
         private readonly IProdutoService produtoService = _produtoService;
         private readonly IMapper mapper = _mapper;
 
+
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         [HttpPost]
         public async Task<ActionResult> Insert(ProdutoModelRequest produtoModelRequest)
         {
             var produto = _mapper.Map<ProdutoEntity>(produtoModelRequest);
 
-            await produtoService.Criar(produto);
+            await produtoService.Insert(produto);
 
             var produtoMapped = _mapper.Map(produto, produtoModelRequest);
 
             return Ok(produtoMapped);
         }
 
-        [HttpDelete("/{id}")]
+        [HttpDelete("/{id:int}")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult> Delete([FromQuery] int id)
         {
-            var produtoEntity = await produtoService.Deletar(id);
+            var produtoEntity = await produtoService.Delete(id);
 
             if (!produtoEntity.IsSuccess)
             {
                 return BadRequest(produtoEntity.ErrorMessage);
             }
 
-            Response.Headers.Add("X-Message", produtoEntity?.SuccessMessage);
+            // Response.Headers.Add("X-Message", produtoEntity?.SuccessMessage);
 
             var produtoMapeado = mapper.Map<ProdutoModelRequest>(produtoEntity.Value);
 
             return Ok(id);
         }
 
+
         [HttpGet("/{id}")]
-        public async Task<ActionResult<ProdutoModelResponse>> GetById(int id)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<ProdutoModelResponse>> GetById(int? id)
         {
-            var produto = await produtoService.GetId(id);
+            if (id == null || id < 0)
+            {
+                return BadRequest("Id não encontrado");
+            }
+
+            var produto = await produtoService?.GetId(id);
 
             if (!produto.IsSuccess)
             {
@@ -64,27 +81,43 @@ namespace cadastro_produtos_design_patterns.Controllers
             return Ok(produtosMapped);
         }
 
-
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<List<ProdutoModelRequest>>> GetAll()
         {
-            var produtosEntitys = await produtoService.Get();
-
-            if (!produtosEntitys.IsSuccess)
+            try
             {
-                return BadRequest(produtosEntitys.ErrorMessage);
+                var produtosEntitys = await produtoService.GetAll();
+
+                if (!produtosEntitys.IsSuccess)
+                {
+                    return NotFound(produtosEntitys.ErrorMessage);
+                }
+
+                var produtosMapped = mapper.Map<List<ProdutoModelRequest>>(produtosEntitys.Value);
+
+
+                // Response.Headers.Add("X-Message", "Success");
+
+                return Ok(produtosMapped);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
             }
 
-            var produtosMapped = mapper.Map<List<ProdutoModelRequest>>(produtosEntitys.Value);
-
-            Response.Headers.Add("X-Message", "Success");
-
-            return Ok(produtosMapped);
         }
 
-        [HttpPut]
-        public async Task<ActionResult<ProdutoModelRequest>> Update()
+        [HttpPut("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<ProdutoModelResponse>> Update(int? id, ProdutoModelRequestUpdate produtoModelRequest)
         {
+
+
             return Ok();
         }
 

@@ -8,7 +8,7 @@ namespace Ecommerce.Tests.UnitTests.Patterns
 {
     public interface IDeleteTest
     {
-        Task Put_Delete_Return_OkResult();
-        Task Put_Delete_Return_NotFound();
+        Task Delete_Return_OkResult();
+        Task Delete_Return_NotFound();
     }
 }

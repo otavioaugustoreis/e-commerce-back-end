@@ -16,7 +16,7 @@ namespace Cadastro.Application.Services
     {
         private readonly IUnitOfWork unitOfWork = _unitOfWork;
 
-        public async Task<Result<PedidoEntity>> Criar(PedidoEntity entity)
+        public async Task<Result<PedidoEntity>> Insert(PedidoEntity entity)
         {
             var valorPedido = await CalcularValorPedidoAsync(entity.PedidoItemEntity);
 
@@ -38,17 +38,17 @@ namespace Cadastro.Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<Result<PedidoEntity>> Deletar(int id)
+        public Task<Result<PedidoEntity>> Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Result<IEnumerable<PedidoEntity>>> Get()
+        public Task<Result<IEnumerable<PedidoEntity>>> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Task<Result<PedidoEntity>> GetId(int id)
+        public Task<Result<PedidoEntity>> GetId(int? id)
         {
             throw new NotImplementedException();
         }
@@ -87,6 +87,12 @@ namespace Cadastro.Application.Services
             }
 
             return Result<double>.Success(valor);
+        }
+
+
+        public Task<Result<PedidoEntity>> Update(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

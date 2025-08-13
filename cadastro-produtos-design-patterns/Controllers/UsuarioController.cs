@@ -24,7 +24,7 @@ namespace cadastro_produtos_design_patterns.Controllers
             
             var usuario = mapper.Map<UsuarioEntity>(usuarioEntity);
 
-            var usuarioCriado = await usuarioService.Criar(usuario);
+            var usuarioCriado = await usuarioService.Insert(usuario);
             
             return Ok(new
                         { Usuario = usuarioCriado.Value,
@@ -35,7 +35,7 @@ namespace cadastro_produtos_design_patterns.Controllers
         [HttpGet]
         public async Task<ActionResult<List<UsuarioModelResponse>>> GetUsuarios()
         {
-            var usuarios = await usuarioService.Get();
+            var usuarios = await usuarioService.GetAll();
 
             var usuariosModelResponse = mapper.Map<List<UsuarioModelResponse>>(usuarios.Value);
 

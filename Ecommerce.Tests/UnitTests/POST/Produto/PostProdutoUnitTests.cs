@@ -1,6 +1,10 @@
 ﻿using cadastro_produtos_design_patterns.Controllers;
+using cadastro_produtos_design_patterns.Model.Request;
+using cadastro_produtos_design_patterns.Model.Response;
 using Ecommerce.Tests.UnitTests.ConfigureTests;
 using Ecommerce.Tests.UnitTests.Patterns;
+using FluentAssertions;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,13 +25,33 @@ namespace Ecommerce.Tests.UnitTests.POST.Produto
         [Fact]
         public async Task Post_Return_BadRequest()
         {
-            throw new NotImplementedException();
+            ProdutoModelRequest produtoDTO = new()
+            {
+                DsNome = "Camiseta branca básica",
+                NrValor = 200.00,
+                Quantidade = 3
+            };
+
+            var produto = _controller.Insert(produtoDTO);
+
+            produto.Result.Should().BeOfType<BadRequestObjectResult>()
+                .Subject.StatusCode.Should().Be(400);
         }
 
         [Fact]
         public async Task Post_Return_CreatedStatusCode()
         {
-            throw new NotImplementedException();
+            ProdutoModelRequest produtoDTO = new()
+            {
+                DsNome = "Camiseta branca básica",
+                NrValor = 200.00,
+                Quantidade = 3
+            };
+
+            var produto = _controller.Insert(produtoDTO);
+
+            produto.Result.Should().BeOfType<OkObjectResult>()
+                .Subject.StatusCode.Should().Be(200);
         }
     }
 }

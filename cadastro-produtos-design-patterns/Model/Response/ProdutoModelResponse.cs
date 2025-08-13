@@ -2,7 +2,8 @@
 {
     public class ProdutoModelResponse
     {
-        public string DsNome { get; set; }
+        public int PkId       { get; set; }
+        public string DsNome  { get; set; }
         public int Quantidade { get; set; }
         public double NrValor { get; set; }
     }

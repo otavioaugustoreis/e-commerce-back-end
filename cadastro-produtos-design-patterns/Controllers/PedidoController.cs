@@ -37,7 +37,7 @@ namespace cadastro_produtos_design_patterns.Controllers
             var pedidoEntity = mapper.Map<PedidoEntity>(pedidoModelRequest);
 
 
-            var pedido = pedidoService.Criar(pedidoEntity);
+            var pedido = pedidoService.Insert(pedidoEntity);
             
 
             return Ok("Pedido efetuado com sucesso " + pedidoEntity);

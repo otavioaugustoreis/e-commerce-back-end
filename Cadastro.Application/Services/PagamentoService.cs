@@ -26,30 +26,41 @@ namespace Cadastro.Application.Services
         private readonly IMediator _mediator = mediator;
         private readonly IPedidoService pedidoService = _pedidoService;  
 
-        public  async  Task<Result<PagamentoEntity>> Criar(PagamentoEntity pagamento)
+        public async Task<Result<PagamentoEntity>> Insert(PagamentoEntity pagamento)
         {
             IPagamentoStrategy result = pagamentoFactory.RetornarPagamento(pagamento.TipoPagamento);
            
             var pagando = result.Pagar(pagamento);
 
-            await unitOfWork!.PagamentoRepository!.CreateAsync(pagando.Value!);
+             unitOfWork!.PagamentoRepository!.CreateAsync(pagando.Value!);
 
             await _mediator.Publish(new PagamentoAprovadoEvent(pagando.Value.PkId, pagando.Value.Valor));
 
             return pagando;
         }
 
-        public Task<Result<PagamentoEntity>> Deletar(int id)
+        public Task<Result<PagamentoEntity>> Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Result<IEnumerable<PagamentoEntity>>> Get()
+        public Task<Result<IEnumerable<PagamentoEntity>>> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Task<Result<PagamentoEntity>> GetId(int id)
+        public Task<Result<PagamentoEntity>> GetId(int? id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Result<PagamentoEntity>> GetPagamentoByPedidoById(int idPedido)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public Task<Result<PagamentoEntity>> Update(int id)
         {
             throw new NotImplementedException();
         }

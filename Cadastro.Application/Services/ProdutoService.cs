@@ -23,7 +23,7 @@ namespace Cadastro.Application.Services
         //private readonly ICacheService cacheService = _cacheService;
 
 
-        public async Task<Result<ProdutoEntity>> Criar(ProdutoEntity entity)
+        public async Task<Result<ProdutoEntity>> Insert(ProdutoEntity entity)
         {
             var produtoCadastrado = await unitOfWork.ProdutoRepository.CreateAsync(entity);
             unitOfWork.Commit();
@@ -68,7 +68,7 @@ namespace Cadastro.Application.Services
         //    return Result<ProdutoEntity>.Success(produto);
         //}
 
-        public async Task<Result<ProdutoEntity>> Deletar(int id)
+        public async Task<Result<ProdutoEntity>> Delete(int id)
         {
             var produto = await unitOfWork.ProdutoRepository.GetByIdAsync(id);
 
@@ -82,7 +82,7 @@ namespace Cadastro.Application.Services
         }
 
 
-        public async Task<Result<IEnumerable<ProdutoEntity>>> Get()
+        public async Task<Result<IEnumerable<ProdutoEntity>>> GetAll()
         {
 
             var products = await unitOfWork.ProdutoRepository.GetAsync();
@@ -95,7 +95,7 @@ namespace Cadastro.Application.Services
             return Result<IEnumerable<ProdutoEntity>>.Success(products);
         }
 
-        public async Task<Result<ProdutoEntity>> GetId(int id)
+        public async Task<Result<ProdutoEntity>> GetId(int? id)
         {
                 ProdutoEntity produto;
 
@@ -107,6 +107,16 @@ namespace Cadastro.Application.Services
                 }
 
             return Result<ProdutoEntity>.Success(produto);
+        }
+
+        public Task<Result<ProdutoEntity>> Create(ProdutoEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Result<ProdutoEntity>> Update(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,13 +1,15 @@
 ﻿using cadastro_produtos_design_patterns.Controllers;
 using Ecommerce.Tests.UnitTests.ConfigureTests;
 using Ecommerce.Tests.UnitTests.Patterns;
+using FluentAssertions;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ecommerce.Tests.UnitTests.DELETE
+namespace Ecommerce.Tests.UnitTests.DELETE.Produto
 {
     public class DeleteProductsUnitTests : IClassFixture<ProdutoUnitTestController>, IDeleteTest
     {
@@ -19,14 +21,23 @@ namespace Ecommerce.Tests.UnitTests.DELETE
         }
 
         [Fact]
-        public async Task Put_Delete_Return_NotFound()
+        public async Task Delete_Return_NotFound()
         {
-            throw new NotImplementedException();
+            int idProduto = -1;
+
+            var result = _controller.Delete(idProduto);
+
+            result.Result.Should().BeOfType<NotFoundObjectResult>().Which.StatusCode.Should().Be(404);
         }
         [Fact]
-        public async Task Put_Delete_Return_OkResult()
+        public async Task Delete_Return_OkResult()
         {
-            throw new NotImplementedException();
+            int idProduto = 2;
+
+            var result = _controller.Delete(idProduto);
+
+            result.Should().NotBeNull();
+            result.Result.Should().BeOfType<OkObjectResult>().Which.StatusCode.Should().Be(200); 
         }
     }
 }

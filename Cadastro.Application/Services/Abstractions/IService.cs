@@ -10,9 +10,10 @@ namespace Cadastro.Application.Services.Abstractions
 {
     public interface IService<T>
     {
-        Task<Result<T>> Criar(T entity);
-        Task<Result<IEnumerable<T>>> Get();
-        Task<Result<T>> GetId(int id);
-        Task<Result<T>> Deletar(int id);
+        Task<Result<T>> Insert(T entity);
+        Task<Result<IEnumerable<T>>> GetAll();
+        Task<Result<T>> GetId(int? id);
+        Task<Result<T>> Delete(int id);
+        Task<Result<T>> Update(int id);
     }
 }

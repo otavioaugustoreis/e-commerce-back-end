@@ -16,7 +16,6 @@ namespace Ecommerce.Tests.UnitTests.GET.Produto
 {
     public class GetProductsUnitTests : IClassFixture<ProdutoUnitTestController>, IGetTest<ProdutoEntity>
     {
-
         private readonly ProdutoController _controller;
 
         public GetProductsUnitTests(ProdutoUnitTestController controller)
@@ -24,22 +23,37 @@ namespace Ecommerce.Tests.UnitTests.GET.Produto
             _controller = new ProdutoController(controller.produtoService, controller.mapper);
         }
 
-
         [Fact]
         public async Task GetAll_Return_BadRequestResult()
         {
-            throw new NotImplementedException();
-        }
+            var data = await _controller.GetAll();
 
+            data.Result.Should().BeOfType<BadRequestObjectResult>()
+                .Which.StatusCode
+                .Should()
+                .Be(400);
+        }
         [Fact]
         public async Task GetAll_Return_ListOfProdutoDTO()
         {
-            throw new NotImplementedException();
+            var data = await _controller.GetAll();
+
+            data.Result.Should().BeOfType<OkObjectResult>()
+                .Which.StatusCode
+                .Should()
+                .Be(200);
         }
         [Fact]
         public async Task GetById_Return_BadRequest()
         {
-            throw new NotImplementedException();
+            var idProduto = -1;
+
+            var data = await _controller.GetById(idProduto);
+
+            data.Result.Should().BeOfType<BadRequestObjectResult>()
+                .Which.StatusCode
+                .Should()
+                .Be(400);
         }
         [Fact]
         public async Task GetById_Return_NotFound()

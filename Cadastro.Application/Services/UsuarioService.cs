@@ -20,7 +20,7 @@ namespace Cadastro.Application.Services
         private readonly IUnitOfWork unitOfWork = _unitOfWork;
 
 
-        public async Task<Result<UsuarioEntity>> Criar(UsuarioEntity usuarioEntity)
+        public async Task<Result<UsuarioEntity>> Insert(UsuarioEntity usuarioEntity)
         {
             if (usuarioEntity is null) return Result<UsuarioEntity>.Failure("Usuário é nulo");
 
@@ -30,12 +30,12 @@ namespace Cadastro.Application.Services
             return Result<UsuarioEntity>.Success(usuarioEntity, "Usuario cadastrado com sucesso.");
        }
 
-        public Task<Result<UsuarioEntity>> Deletar(int id)
+        public Task<Result<UsuarioEntity>> Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<Result<IEnumerable<UsuarioEntity>>> Get()
+        public async Task<Result<IEnumerable<UsuarioEntity>>> GetAll()
         {
             var usuarios = await unitOfWork.UsuarioRepository.GetAsync();
 
@@ -45,7 +45,7 @@ namespace Cadastro.Application.Services
             return Result<IEnumerable<UsuarioEntity>>.Success(usuarios);
         }
 
-        public async Task<Result<UsuarioEntity>> GetId(int id)
+        public async Task<Result<UsuarioEntity>> GetId(int? id)
         {
             var usuario = await unitOfWork.UsuarioRepository.GetByIdAsync(id);
 
@@ -59,9 +59,14 @@ namespace Cadastro.Application.Services
         {
             var usuario = await unitOfWork.UsuarioRepository.GetUsuarioByEmail(email);
 
-            if (usuario is null) return Result<UsuarioEntity>.Failure("Usuário não cadastrado, faça o cadastro");
+            if (usuario is null) return Result<UsuarioEntity>.Failure("Usuário não cadastrado.");
 
             return Result<UsuarioEntity>.Success(usuario);
+        }
+
+        public Task<Result<UsuarioEntity>> Update(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
