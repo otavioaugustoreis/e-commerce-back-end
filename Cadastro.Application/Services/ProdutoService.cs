@@ -16,12 +16,11 @@ using System.Threading.Tasks;
 namespace Cadastro.Application.Services
 {
     public class ProdutoService
-        (IUnitOfWork _unitOfWork,
-        ICacheService _cacheService) : IProdutoService
+        (IUnitOfWork _unitOfWork) : IProdutoService
     {
 
         private readonly IUnitOfWork unitOfWork = _unitOfWork;
-        private readonly ICacheService cacheService = _cacheService;
+        //private readonly ICacheService cacheService = _cacheService;
 
 
         public async Task<Result<ProdutoEntity>> Criar(ProdutoEntity entity)
@@ -32,48 +31,48 @@ namespace Cadastro.Application.Services
             return Result<ProdutoEntity>.Success(produtoCadastrado, "Produto cadastrado com sucesso");
         }
 
-        public async  Task<Result<IEnumerable<ProdutoEntity>>> Get()
-        {
+        //public async Task<Result<IEnumerable<ProdutoEntity>>> Get()
+        //{
 
-            var products = await unitOfWork.ProdutoRepository.GetAsync();
+        //    var products = await unitOfWork.ProdutoRepository.GetAsync();
 
-            if (!products.Any())
-            {
-            return Result<IEnumerable<ProdutoEntity>>.Failure("Não existem produtos cadastrado");
-            }
-            
-            return Result<IEnumerable<ProdutoEntity>>.Success(products);
-        }
+        //    if (!products.Any())
+        //    {
+        //        return Result<IEnumerable<ProdutoEntity>>.Failure("Não existem produtos cadastrado");
+        //    }
 
-        public async Task<Result<ProdutoEntity>> GetId(int id)
-        {
-            ProdutoEntity produto;
+        //    return Result<IEnumerable<ProdutoEntity>>.Success(products);
+        //}
 
-            var produtoCache= await cacheService.GetAsync(id.ToString());
+        //public async Task<Result<ProdutoEntity>> GetId(int id)
+        //{
+        //    ProdutoEntity produto;
+
+        //    var produtoCache = await cacheService.GetAsync(id.ToString());
 
 
-            if (string.IsNullOrEmpty(produtoCache))
-            {
-                produto = await unitOfWork.ProdutoRepository.GetByIdAsync(id);
+        //    if (string.IsNullOrEmpty(produtoCache))
+        //    {
+        //        produto = await unitOfWork.ProdutoRepository.GetByIdAsync(id);
 
-                if (produto is null)
-                {
-                    return Result<ProdutoEntity>.Failure("O produto não foi encontrado");
-                }
-                await cacheService.SetAsync(produto.PkId.ToString(), JsonSerializer.Serialize(produto));
+        //        if (produto is null)
+        //        {
+        //            return Result<ProdutoEntity>.Failure("O produto não foi encontrado");
+        //        }
+        //        await cacheService.SetAsync(produto.PkId.ToString(), JsonSerializer.Serialize(produto));
 
-                return Result<ProdutoEntity>.Success(produto);
-            }
+        //        return Result<ProdutoEntity>.Success(produto);
+        //    }
 
-            produto = JsonSerializer.Deserialize<ProdutoEntity>(produtoCache)!;
-            return Result<ProdutoEntity>.Success(produto);
-        }
+        //    produto = JsonSerializer.Deserialize<ProdutoEntity>(produtoCache)!;
+        //    return Result<ProdutoEntity>.Success(produto);
+        //}
 
         public async Task<Result<ProdutoEntity>> Deletar(int id)
         {
-            var produto =  await unitOfWork.ProdutoRepository.GetByIdAsync(id);
+            var produto = await unitOfWork.ProdutoRepository.GetByIdAsync(id);
 
-            if(produto is null)
+            if (produto is null)
                 return Result<ProdutoEntity>.Failure("Produto não encontrado");
 
             var removerProduto = await unitOfWork.ProdutoRepository.RemoveAsync(produto);
@@ -82,5 +81,32 @@ namespace Cadastro.Application.Services
             return Result<ProdutoEntity>.Success(null, "Produto removido com sucesso");
         }
 
+
+        public async Task<Result<IEnumerable<ProdutoEntity>>> Get()
+        {
+
+            var products = await unitOfWork.ProdutoRepository.GetAsync();
+
+            if (!products.Any())
+            {
+                return Result<IEnumerable<ProdutoEntity>>.Failure("Não existem produtos cadastrado");
+            }
+
+            return Result<IEnumerable<ProdutoEntity>>.Success(products);
+        }
+
+        public async Task<Result<ProdutoEntity>> GetId(int id)
+        {
+                ProdutoEntity produto;
+
+                produto = await unitOfWork.ProdutoRepository.GetByIdAsync(id);
+
+                if (produto is null)
+                {
+                    return Result<ProdutoEntity>.Failure("O produto não foi encontrado");
+                }
+
+            return Result<ProdutoEntity>.Success(produto);
+        }
     }
 }

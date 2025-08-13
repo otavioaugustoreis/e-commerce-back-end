@@ -16,6 +16,7 @@ namespace cadastro_produtos_design_patterns.Mapper
             CreateMap<LoginEntity, LoginModelResponse>().ReverseMap();
 
             CreateMap<ProdutoEntity, ProdutoModelRequest>().ReverseMap();
+            CreateMap<ProdutoEntity, ProdutoModelResponse>().ReverseMap();
 
             CreateMap<PedidoModelRequest, PedidoEntity>()
                  .ForMember(dest => dest.FkUsuario, opt => opt.MapFrom(src => src.FkUsuario))

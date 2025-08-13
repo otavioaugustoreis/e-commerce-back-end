@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Cadastro.Application.Services;
+using Cadastro.Application.Services.Abstractions;
 using Cadastro.Data;
 using Cadastro.Data.UnitOfWork;
 using cadastro_produtos_design_patterns.Mapper;
@@ -16,14 +18,18 @@ namespace Ecommerce.Tests.UnitTests.ConfigureTests
 {
     public class ProdutoUnitTestController
     {
+
+        public IProdutoService produtoService;
         public IUnitOfWork unitOfWork;
         public IMapper mapper;
-        public static DbContextOptions<AppDbContext>  dbContextOptions {  get; }
-        public static string ConnectionString = @"Data Source=DESKTOP-GF22MH3\\SQLEXPRESS;Initial Catalog=db_ecommerce;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        public static DbContextOptions<AppDbContext>  dbContextOptions { get; }
+        public static string ConnectionString = "Data Source=DESKTOP-GF22MH3\\SQLEXPRESS;Initial Catalog=db_ecommerce;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
         static ProdutoUnitTestController()
         {
-
+            dbContextOptions = new DbContextOptionsBuilder<AppDbContext>()
+                                   .UseSqlServer(ConnectionString)
+                                   .Options;                              
         }
 
         public ProdutoUnitTestController()
@@ -36,6 +42,7 @@ namespace Ecommerce.Tests.UnitTests.ConfigureTests
             mapper = config.CreateMapper();
             var context = new AppDbContext(dbContextOptions);
             unitOfWork = new UnitOfWork(_appDbContext: context);
+            produtoService = new ProdutoService(unitOfWork);
        }
     }
 }

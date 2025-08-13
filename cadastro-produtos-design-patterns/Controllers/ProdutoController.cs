@@ -3,6 +3,7 @@ using Cadastro.Application.Services.Abstractions;
 using Cadastro.Application.Services.Cache;
 using Cadastro.Domain.Entities;
 using cadastro_produtos_design_patterns.Model.Request;
+using cadastro_produtos_design_patterns.Model.Response;
 using Microsoft.AspNetCore.Mvc;
 
 namespace cadastro_produtos_design_patterns.Controllers
@@ -17,7 +18,7 @@ namespace cadastro_produtos_design_patterns.Controllers
         private readonly IMapper mapper = _mapper;
 
         [HttpPost]
-        public async Task<ActionResult> Inserir(ProdutoModelRequest produtoModelRequest)
+        public async Task<ActionResult> Insert(ProdutoModelRequest produtoModelRequest)
         {
             var produto = _mapper.Map<ProdutoEntity>(produtoModelRequest);
 
@@ -29,7 +30,7 @@ namespace cadastro_produtos_design_patterns.Controllers
         }
 
         [HttpDelete("/{id}")]
-        public async Task<ActionResult> Remover([FromQuery] int id)
+        public async Task<ActionResult> Delete([FromQuery] int id)
         {
             var produtoEntity = await produtoService.Deletar(id);
 
@@ -44,6 +45,25 @@ namespace cadastro_produtos_design_patterns.Controllers
 
             return Ok(id);
         }
+
+        [HttpGet("/{id}")]
+        public async Task<ActionResult<ProdutoModelResponse>> GetById(int id)
+        {
+            var produto = await produtoService.GetId(id);
+
+            if (!produto.IsSuccess)
+            {
+                return NotFound(produto.ErrorMessage);
+            }
+
+            var produtosMapped = mapper.Map<ProdutoModelResponse>(produto.Value);
+
+
+            //Response.Headers.Add("X-Message", "Success");
+
+            return Ok(produtosMapped);
+        }
+
 
         [HttpGet]
         public async Task<ActionResult<List<ProdutoModelRequest>>> GetAll()
@@ -63,7 +83,7 @@ namespace cadastro_produtos_design_patterns.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<ProdutoModelRequest>> Alterar()
+        public async Task<ActionResult<ProdutoModelRequest>> Update()
         {
             return Ok();
         }

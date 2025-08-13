@@ -41,7 +41,7 @@ namespace cadastro_produtos_design_patterns.Util
             builder.AddScoped<IPagamentoFactory, PagamentoFactory>();
 
             builder.AddScoped<IUnitOfWork, UnitOfWork>();
-            builder.AddScoped<ICacheService, CachingService>();
+            //  builder.AddScoped<ICacheService, CachingService>();
 
 
             return builder;

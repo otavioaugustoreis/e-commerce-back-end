@@ -26,10 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UnitTests\GET\" />
-    <Folder Include="UnitTests\DELETE\" />
-    <Folder Include="UnitTests\POST\" />
-    <Folder Include="UnitTests\PUT\" />
+    <Folder Include="UnitTests\GET\Usuario\" />
   </ItemGroup>
 
 </Project>
