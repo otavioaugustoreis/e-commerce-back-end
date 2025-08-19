@@ -9,5 +9,6 @@ namespace Cadastro.Data.Repositories.Pattern
 {
     public interface IPedidoItemRepository  : IRepository<PedidoItemEntity>
     {
+        Task<List<PedidoItemEntity>> GetPedidoItemByProducts(List<PedidoItemEntity> pedidoItemEntities);
     }
 }
