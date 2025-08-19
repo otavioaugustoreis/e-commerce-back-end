@@ -12,38 +12,36 @@ using System.Threading.Tasks;
 namespace Cadastro.Data.UnitOfWork
 {
     public class UnitOfWork(
-            IRepository<PagamentoEntity> _pagamentoRepository = null,
+            IPagamentoRepository _pagamentoRepository = null,
             IUsuarioRepository _usuarioRepository =  null,
-            IRepository<NotificacaoEntity> _notificaoRepository =  null,
-            IRepository<PedidoEntity> _pedidoRepository =  null,
+            INotificacaoRepository _notificaoRepository =  null,
+            IPedidoRepository _pedidoRepository =  null,
             ILoginRepository _loginRepository = null,
-            IRepository<PedidoItemEntity> _pedidoItemRepository =  null,
-            IRepository<ProdutoEntity> _produtoRepository =  null,
+            IPedidoItemRepository _pedidoItemRepository =  null,
+            IProdutoRepository _produtoRepository =  null,
             AppDbContext _appDbContext = null) : IUnitOfWork
     {
         
 
-        private readonly IRepository<PagamentoEntity> pagamentoRepository = _pagamentoRepository;
+        private readonly IPagamentoRepository pagamentoRepository = _pagamentoRepository;
         private readonly IUsuarioRepository usuarioRepository = _usuarioRepository;
-        private readonly IRepository<NotificacaoEntity> notificaoRepository = _notificaoRepository;
-        private readonly IRepository<PedidoEntity> pedidoRepository = _pedidoRepository;
-        private readonly IRepository<PedidoItemEntity> pedidoItemRepository = _pedidoItemRepository;
-        private readonly IRepository<ProdutoEntity> produtoRepository = _produtoRepository;
+        private readonly INotificacaoRepository notificaoRepository = _notificaoRepository;
+        private readonly IPedidoRepository pedidoRepository = _pedidoRepository;
+        private readonly IPedidoItemRepository pedidoItemRepository = _pedidoItemRepository;
+        private readonly IProdutoRepository produtoRepository = _produtoRepository;
         private readonly ILoginRepository loginRepository = _loginRepository;
         private readonly AppDbContext appDbContext = _appDbContext;
 
-        
-
-        public IRepository<PagamentoEntity> PagamentoRepository { get => pagamentoRepository ?? new PagamentoRepository(appDbContext); }
+        public IPagamentoRepository PagamentoRepository { get => pagamentoRepository ?? new PagamentoRepository(appDbContext); }
         public IUsuarioRepository UsuarioRepository { get => usuarioRepository ?? new UsuarioRepository(appDbContext); }
 
-        public IRepository<NotificacaoEntity> NotificacaoNotify { get => notificaoRepository ?? new NotificacaoRepository(appDbContext); }
+        public INotificacaoRepository NotificacaoNotify { get => notificaoRepository ?? new NotificacaoRepository(appDbContext); }
 
-        public IRepository<PedidoEntity> PedidoRepository { get => pedidoRepository ?? new PedidoRepository(appDbContext); }
+        public IPedidoRepository PedidoRepository { get => pedidoRepository ?? new PedidoRepository(appDbContext); }
 
-        public IRepository<PedidoItemEntity> PedidoItemRepository { get => pedidoItemRepository ?? new PedidoItemRepository(appDbContext); }
+        public IPedidoItemRepository PedidoItemRepository { get => pedidoItemRepository ?? new PedidoItemRepository(appDbContext); }
 
-        public IRepository<ProdutoEntity> ProdutoRepository { get => produtoRepository ?? new ProdutoRepository(appDbContext); }
+        public IProdutoRepository ProdutoRepository { get => produtoRepository ?? new ProdutoRepository(appDbContext); }
 
         public ILoginRepository LoginRepository { get => loginRepository ?? new LoginRepository(appDbContext); }
 

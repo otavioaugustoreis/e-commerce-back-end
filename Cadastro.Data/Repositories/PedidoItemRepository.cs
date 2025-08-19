@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Cadastro.Data.Repositories
 {
     public class PedidoItemRepository
-        (AppDbContext _appDbContext) : IRepository<PedidoItemEntity>
+        (AppDbContext _appDbContext) : IPedidoItemRepository
     {
 
         private readonly AppDbContext appDbContext = _appDbContext;

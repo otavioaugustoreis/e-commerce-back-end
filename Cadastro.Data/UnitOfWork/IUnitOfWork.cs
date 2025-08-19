@@ -11,12 +11,12 @@ namespace Cadastro.Data.UnitOfWork
 {
     public interface IUnitOfWork
     {
-        public IRepository<PagamentoEntity> PagamentoRepository { get; }
+        public IPagamentoRepository PagamentoRepository { get; }
         public IUsuarioRepository UsuarioRepository { get; }
-        public IRepository<NotificacaoEntity> NotificacaoNotify { get; }
-        public IRepository<PedidoEntity> PedidoRepository { get; }
-        public IRepository<PedidoItemEntity> PedidoItemRepository { get; }
-        public IRepository<ProdutoEntity> ProdutoRepository { get; }
+        public INotificacaoRepository NotificacaoNotify { get; }
+        public IPedidoRepository PedidoRepository { get; }
+        public IPedidoItemRepository PedidoItemRepository { get; }
+        public IProdutoRepository ProdutoRepository { get; }
         public ILoginRepository  LoginRepository{ get; }
         public void Commit();
     }

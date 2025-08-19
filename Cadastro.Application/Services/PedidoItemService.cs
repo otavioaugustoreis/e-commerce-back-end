@@ -19,7 +19,7 @@ namespace Cadastro.Application.Services
 
         public Task<Result<PedidoItemEntity>> Criar(ProdutoEntity produtoEntity, PagamentoEntity pagamentoEntity)
         {
-            throw new NotImplementedException();
+            return null;
         }
     }
 }

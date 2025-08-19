@@ -22,7 +22,6 @@ namespace Cadastro.Application.Services
         private readonly IUnitOfWork unitOfWork = _unitOfWork;
         //private readonly ICacheService cacheService = _cacheService;
 
-
         public async Task<Result<ProdutoEntity>> Insert(ProdutoEntity entity)
         {
             var produtoCadastrado = await unitOfWork.ProdutoRepository.CreateAsync(entity);

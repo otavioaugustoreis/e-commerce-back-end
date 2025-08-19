@@ -66,31 +66,18 @@ namespace Cadastro.Application.Services
         {
             double valor = 0;
 
-            foreach (var item in pedidoItemEntity) 
-            {
-                var produto = await unitOfWork.ProdutoRepository.GetByIdAsync(item.FkProduto);
 
-                if (item.NrQuantidade > produto.Quantidade)
-                {
-                    return Result<double>.Failure("A quantidade fornecida não corresponde com a quantidade do produto");
-                }
-                
-                var valorProduto = produto.NrValor;
-                var quantidade = item.NrQuantidade;
-
-                valor += valorProduto * quantidade;
-
-                produto.DiminuirQuantidade(quantidade);
-
-                await unitOfWork.ProdutoRepository.UpdateAsync(produto);
-                unitOfWork.Commit();
-            }
 
             return Result<double>.Success(valor);
         }
 
 
         public Task<Result<PedidoEntity>> Update(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Result<PedidoEntity>> PedidoPago(PedidoEntity pedidoEntity, PagamentoEntity pagamentoEntity)
         {
             throw new NotImplementedException();
         }
