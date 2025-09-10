@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  cadastro-produtos-design-patterns:
+    image: ${DOCKER_REGISTRY-}cadastroprodutosdesignpatterns
+    build:
+      context: .
+      dockerfile: cadastro-produtos-design-patterns/Dockerfile

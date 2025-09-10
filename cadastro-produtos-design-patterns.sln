@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cadastro.Data", "Cadastro.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cadastro.Domain", "Cadastro.Domain\Cadastro.Domain.csproj", "{39F8F75C-B160-4B5C-8045-5BA701F211B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce.Tests", "Ecommerce.Tests\Ecommerce.Tests.csproj", "{26F6E090-0675-4332-A0DC-841BE067BB92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecommerce.Tests", "Ecommerce.Tests\Ecommerce.Tests.csproj", "{26F6E090-0675-4332-A0DC-841BE067BB92}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{8EA9DC9F-BBC0-453B-ADD5-78DDDAC25AB2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{26F6E090-0675-4332-A0DC-841BE067BB92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26F6E090-0675-4332-A0DC-841BE067BB92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26F6E090-0675-4332-A0DC-841BE067BB92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EA9DC9F-BBC0-453B-ADD5-78DDDAC25AB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EA9DC9F-BBC0-453B-ADD5-78DDDAC25AB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EA9DC9F-BBC0-453B-ADD5-78DDDAC25AB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EA9DC9F-BBC0-453B-ADD5-78DDDAC25AB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
