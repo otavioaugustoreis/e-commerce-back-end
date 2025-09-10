@@ -18,11 +18,11 @@ namespace cadastro_produtos_design_patterns.Util
     {
         public static IServiceCollection AddDIP(this IServiceCollection builder)
         {
-            builder.AddScoped<IRepository<PedidoItemEntity>, PedidoItemRepository>();
-            builder.AddScoped<IRepository<PedidoEntity>, PedidoRepository>();
-            builder.AddScoped<IRepository<NotificacaoEntity>, NotificacaoRepository>();
-            builder.AddScoped<IRepository<PagamentoEntity>, PagamentoRepository>();
-            builder.AddScoped<IRepository<ProdutoEntity>, ProdutoRepository>();
+            builder.AddScoped<IPedidoItemRepository, PedidoItemRepository>();
+            builder.AddScoped<IPedidoRepository, PedidoRepository>();
+            builder.AddScoped<INotificacaoRepository, NotificacaoRepository>();
+            builder.AddScoped<IPagamentoRepository, PagamentoRepository >();
+            builder.AddScoped<IProdutoRepository, ProdutoRepository>();
             builder.AddScoped<IUsuarioRepository, UsuarioRepository>();
             builder.AddScoped<ILoginRepository, LoginRepository>();
 

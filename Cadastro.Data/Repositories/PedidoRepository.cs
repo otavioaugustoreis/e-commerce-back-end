@@ -10,7 +10,7 @@ namespace Cadastro.Data.Repositories
 {
 
     public class PedidoRepository
-        (AppDbContext _appDbContext) : IRepository<PedidoEntity>
+        (AppDbContext _appDbContext) : IPedidoRepository
     {
 
         private readonly AppDbContext appDbContext = _appDbContext;

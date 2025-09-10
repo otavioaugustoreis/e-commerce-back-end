@@ -1,5 +1,6 @@
 ﻿using Cadastro.Data.Repositories.Pattern;
 using Cadastro.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 namespace Cadastro.Data.Repositories
 {
     public class PedidoItemRepository
-        (AppDbContext _appDbContext) : IRepository<PedidoItemEntity>
+        (AppDbContext _appDbContext) : IPedidoItemRepository
     {
 
         private readonly AppDbContext appDbContext = _appDbContext;
@@ -22,12 +23,19 @@ namespace Cadastro.Data.Repositories
 
         public async Task<IEnumerable<PedidoItemEntity>> GetAsync()
         {
-            return appDbContext._PedidoItem.ToList();
+            return appDbContext._PedidoItem.AsNoTracking().ToList();
         }
 
         public async Task<PedidoItemEntity> GetByIdAsync(int? id)
         {
-            return appDbContext._PedidoItem.FirstOrDefault(p => p.PkId == id);
+            return appDbContext._PedidoItem.AsNoTracking().FirstOrDefault(p => p.PkId == id);
+        }
+
+        public async Task<List<PedidoItemEntity>> GetPedidoItemByProducts(List<PedidoItemEntity> pedidoItemEntities)
+        {
+            return await appDbContext._PedidoItem
+                                      .AsNoTracking()
+                                     .Include(p => p.ProdutoEntity).ToListAsync();
         }
 
         public async Task<PedidoItemEntity> RemoveAsync(PedidoItemEntity entity)

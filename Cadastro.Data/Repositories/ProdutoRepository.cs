@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Cadastro.Data.Repositories
 {
     public class ProdutoRepository
-        (AppDbContext _appDbContext) : IRepository<ProdutoEntity>
+        (AppDbContext _appDbContext) : IProdutoRepository
     {
 
         private readonly AppDbContext appDbContext = _appDbContext;

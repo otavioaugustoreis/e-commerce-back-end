@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Cadastro.Data.Repositories
 {
     public class NotificacaoRepository
-        (AppDbContext _appDbContext) : IRepository<NotificacaoEntity>
+        (AppDbContext _appDbContext) : INotificacaoRepository
     {
 
         private readonly AppDbContext appDbContext = _appDbContext;
